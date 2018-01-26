@@ -1,6 +1,10 @@
 
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/googlePolylines)](https://CRAN.R-project.org/package=googlePolylines)
+![downloads](http://cranlogs.r-pkg.org/badges/grand-total/googlePolylines)
+[![Github Stars](https://img.shields.io/github/stars/SymbolixAU/googlePolylines.svg?style=social&label=Github)](https://github.com/SymbolixAU/googlePolylines)
 [![Travis-CI Build Status](https://travis-ci.org/SymbolixAU/googlePolylines.svg?branch=master)](https://travis-ci.org/SymbolixAU/googlePolylines)
 [![Coverage Status](https://img.shields.io/codecov/c/github/SymbolixAU/googlePolylines/master.svg)](https://codecov.io/github/SymbolixAU/googlePolylines?branch=master)
+
 
 # googlePolylines
 
@@ -98,12 +102,12 @@ sf
 
 encode(sf)
 
-#                                                                           geo
-# 1 ohlbDnbmhN~suq@am{tAw`qsAeyhGvkz`@fge}A, ggmnDt}wmLgc`DesuQvvrLofdDorqGtzzV
-# 2 ohlbDnbmhN~suq@am{tAw`qsAeyhGvkz`@fge}A, ggmnDt}wmLgc`DesuQvvrLofdDorqGtzzV
-# 3                                           _{geC~zfjL_ibE_qd_C~hbE~reK?~|}rB
-# 4                                                                  ohlbDnbmhN
-# 5                                                      ohlbDnbmhN, osuoBltprK
+                                       geo
+# 1         POLYGON: ohlbDnbmhN~suq@am{tA...
+# 2 MULTILINESTRING: ohlbDnbmhN~suq@am{tA...
+# 3      LINESTRING: _{geC~zfjL_ibE_qd_C~...
+# 4                     POINT: ohlbDnbmhN...
+# 5                MULTIPOINT: ohlbDnbmhN...
 
 
 # encode data frame as a list of points
@@ -120,13 +124,13 @@ encode(df)
 
 enc <- encode(sf)
 wkt <- polyline_wkt(enc)
-
-                                                                                                                                               geo
-# 1         POLYGON ((-80.19 26.774, -66.118 18.466, -64.757 32.321, -80.19 26.774),(-70.579 28.745, -67.514 29.57, -66.668 27.339, -70.579 28.745))
-# 2 MULTILINESTRING ((-80.19 26.774, -66.118 18.466, -64.757 32.321, -80.19 26.774),(-70.579 28.745, -67.514 29.57, -66.668 27.339, -70.579 28.745))
-# 3                                                                                                      LINESTRING (-70 22, -49 23, -51 22, -70 22)
-# 4                                                                                                                            POINT (-80.19 26.774)
-# 5                                                                                   MULTIPOINT ((-80.19 26.774),(-66.118 18.466),(-64.757 32.321))
+wkt
+                                                                                                                                       geo
+# 1 POLYGON ((-80.19 26.774, -66.1...
+# 2 MULTILINESTRING ((-80.19 26.77...
+# 3 LINESTRING (-70 22, -49 23, -5...
+# 4          POINT (-80.19 26.774)...
+# 5 MULTIPOINT ((-80.19 26.774),(-...
 ```
 
 ### Well-known text to polyline
