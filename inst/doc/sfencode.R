@@ -32,7 +32,6 @@ nc <- sf::st_read(system.file("shape/nc.shp", package="sf"))
 nc[1:5,]
 
 
-
 ## ------------------------------------------------------------------------
 enc <- encode(nc)
 str(enc)
@@ -62,6 +61,28 @@ wkt[1, ]
 ## ------------------------------------------------------------------------
 enc2 <- wkt_polyline(wkt)
 enc2[1, ]
+
+
+## ------------------------------------------------------------------------
+
+# sfc from wkt
+st_as_sfc(wkt$geometry)
+
+## back to sf - use `as.data.frame` to remove sfencoded attributes
+sf_wkt <- as.data.frame(wkt)
+sf_wkt$geometry <- st_as_sfc(sf_wkt$geometry)
+sf_wkt <- st_sf(sf_wkt)
+  
+head(sf_wkt[, c("AREA", "PERIMETER", "geometry")])
+
+
+## ------------------------------------------------------------------------
+polylines <- c(
+ "ohlbDnbmhN~suq@am{tAw`qsAeyhGvkz`@fge}A",
+ "ggmnDt}wmLgc`DesuQvvrLofdDorqGtzzV"
+)
+
+decode(polylines)
 
 
 ## ------------------------------------------------------------------------

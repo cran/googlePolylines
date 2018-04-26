@@ -3,10 +3,10 @@
 
 using namespace Rcpp;
 
-/*
+
 // [[Rcpp::export]]
 Rcpp::List rcpp_decode_polyline(Rcpp::StringVector encodedStrings) {
-  
+
   int encodedSize = encodedStrings.size();
   //Rcpp::List resultLats(encodedSize);
   //Rcpp::List resultLons(encodedSize);
@@ -16,7 +16,7 @@ Rcpp::List rcpp_decode_polyline(Rcpp::StringVector encodedStrings) {
     
     std::string encoded = Rcpp::as< std::string >(encodedStrings[i]);
     
-    Rcpp::NumericMatrix decoded = decode_polyline(encoded);
+    Rcpp::DataFrame decoded = decode_polyline(encoded);
     
     //resultLons[i] = decoded["lon"];
     //resultLats[i] = decoded["lat"];
@@ -30,7 +30,7 @@ Rcpp::List rcpp_decode_polyline(Rcpp::StringVector encodedStrings) {
 
 
 
-Rcpp::NumericMatrix decode_polyline(std::string encoded){
+Rcpp::DataFrame decode_polyline(std::string encoded){
   
   int len = encoded.size();
   int index = 0;
@@ -42,7 +42,7 @@ Rcpp::NumericMatrix decode_polyline(std::string encoded){
   
   while (index < len){
     char b;
-    int shift = 0;
+    unsigned int shift = 0;
     int result = 0;
     do {
       b = encoded.at(index++) - 63;
@@ -66,21 +66,21 @@ Rcpp::NumericMatrix decode_polyline(std::string encoded){
     pointsLon.push_back(lng * (float)1e-5);
   }
   
-//  return Rcpp::DataFrame::create(
-//    Named("lon") = pointsLon,
-//    Named("lat") = pointsLat);
+  // putting latitude first
+  return Rcpp::DataFrame::create(
+    Named("lat") = pointsLat,
+    Named("lon") = pointsLon);
   
-  Rcpp::NumericMatrix mat(pointsLat.size(), 2);
-  mat(_, 0) = pointsLon;
-  mat(_, 1) = pointsLat;
+//  Rcpp::NumericMatrix mat(pointsLat.size(), 2);
+//  mat(_, 0) = pointsLon;
+//  mat(_, 1) = pointsLat;
   
-  return mat;
+//  return mat;
   
 //  return Rcpp::List::create(
 //    _["lon"] = pointsLon,
 //    _["lat"] = pointsLat);
 }
-*/
 
 void EncodeNumber(std::ostringstream& os, int num){
   
@@ -97,13 +97,10 @@ void EncodeNumber(std::ostringstream& os, int num){
 
 void EncodeSignedNumber(std::ostringstream& os, int num){
   
-  int sgn_num = num << 1;
-  
-  if (sgn_num < 0) {
-    sgn_num = ~sgn_num;
-  }
-  
-  EncodeNumber(os, sgn_num);
+  unsigned int ui = num;      //3
+  ui <<= 1;                   //4
+  ui = (num < 0) ? ~ui : ui;  //5
+  EncodeNumber(os, ui);
 }
 
 Rcpp::String encode_polyline(Rcpp::NumericVector longitude,

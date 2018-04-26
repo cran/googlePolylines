@@ -84,7 +84,6 @@ encode(df)
 
 It will not work on GEOMETRYCOLLECTION objects.
 
-
 ```{r}
 
 library(sf)
@@ -92,7 +91,6 @@ library(sf)
 ## data set of North Carolina states
 nc <- sf::st_read(system.file("shape/nc.shp", package="sf"))
 nc[1:5,]
-
 
 ```
 
@@ -147,9 +145,42 @@ enc2[1, ]
 
 I've provided these functions to enable the conversion of encoded polylines into other geometry formats, should they be required by other packages.  
 
+### Converting to sf
+
+`sf` can read well-known text, so you can convert the wkt object back to `sf` / `sfc` objects
+
+```{r}
+
+# sfc from wkt
+st_as_sfc(wkt$geometry)
+
+## back to sf - use `as.data.frame` to remove sfencoded attributes
+sf_wkt <- as.data.frame(wkt)
+sf_wkt$geometry <- st_as_sfc(sf_wkt$geometry)
+sf_wkt <- st_sf(sf_wkt)
+  
+head(sf_wkt[, c("AREA", "PERIMETER", "geometry")])
+
+```
+
+## Decoding
+
+Use `decode()` to decode polylines into coordinates. This function will return a list of data.frames with lon/lat column.
+
+```{r}
+polylines <- c(
+ "ohlbDnbmhN~suq@am{tAw`qsAeyhGvkz`@fge}A",
+ "ggmnDt}wmLgc`DesuQvvrLofdDorqGtzzV"
+)
+
+decode(polylines)
+
+```
+
+
 ## Benchmarking
 
-You will note that the encoded strings are different between the two objects. For example
+You will note that the encoded strings are different between the two `enc` objects created earlier. For example
 
 ```{r}
 enc[1, 'geometry'][[1]] == enc2[1, 'geometry'][[1]]
@@ -164,7 +195,7 @@ library(googleway)
 mapKey <- "your_api_key"
 
 google_map(key = mapKey) %>%
-  add_polygons(data = enc, polyline = "geometry", fill_colour = "#00FF00", fill_opacity = 0.2)
+  add_polygons(data = nc, polyline = "geometry", fill_colour = "#00FF00", fill_opacity = 0.2)
 
 ```
 ![map_enc](./img/map_enc.png)
@@ -186,15 +217,18 @@ library(microbenchmark)
 library(leaflet)
 
 microbenchmark(
+
   goog = { 
     google_map(key = mapKey) %>%
       add_polygons(data = enc, polyline = "polyline")
       },
+      
   leaf = { 
     leaflet() %>%
       addTiles() %>%
       addPolygons(data = nc)
-    }
+    }, 
+    times = 25
 )
 
 Unit: milliseconds
