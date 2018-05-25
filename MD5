@@ -1,4 +1,4 @@
-bfdcb10d675b55788fcfbd1b51eb14b5 *DESCRIPTION
+fb6cc1d1f6d8fb868b36ad4b6759dfb3 *DESCRIPTION
 73ff862037872df29888b9c25566588d *NAMESPACE
 f5f5c7f9a281f3adef088500234adbee *R/Decode.R
 9e33dd194d17942c9b8e77e713a12daf *R/Encode.R
@@ -9,11 +9,11 @@ de95283bc26614d64920a56b73c407ee *R/googlePolylines-package.R
 1d216e342b6e734c702d00c8b4d4dbc8 *R/sfencoded.R
 5d0f71e565c42b9cefb862e37d732dae *R/utils.R
 8070b9f8703ebe3f12ebe4d3e7c32f67 *R/wkt.R
-a85d98da839e79974bc2b39fa96101ce *README.md
-bf10b95ce8675f437983af6d05f89e04 *build/vignette.rds
+1f249ba426fb005e139b753ec0a3b85e *README.md
+9968ebba6ba22ae7d5f391b06ef954d3 *build/vignette.rds
 ccce55f79b4e6467d5b3de48bca41956 *inst/doc/sfencode.R
 e2fd1bb6ced0cb6385def2645e32887c *inst/doc/sfencode.Rmd
-d9c79f04d9aafa68f055eb962676a804 *inst/doc/sfencode.html
+019c3b2534bc3085a5956e137488e987 *inst/doc/sfencode.html
 db86ac6b2fd2305e068a7d322e5d614d *inst/include/googlePolylines.h
 5e4efbd2d9e803f0eadf4c0b4089498d *inst/include/variants.h
 b1e54a94db9fb1e84171bf321d93783c *inst/include/wkt.h
@@ -34,7 +34,7 @@ d8f2ac04a348cf2c66c5d71c65f1d3f7 *src/googlePolylines.cpp
 5e1b05147ac6d164075b910f5d547e71 *src/wkt.cpp
 bc84e591963599110963f739ed238251 *tests/testthat.R
 a0e370fa0b5d27c1116ca46bd06fecbc *tests/testthat/test-Decode.R
-3534f9df37b66f0254af00523f4f4eb2 *tests/testthat/test-Encode.R
+6c8026071dab1a374e9c09f1d8ffa904 *tests/testthat/test-Encode.R
 7873c023f12000d99311b6112fc9c7bf *tests/testthat/test-Utils.R
 6af3b67ffe0a4f8bffcb4ee27d3ee23b *tests/testthat/test-Utils_sf.R
 d2504a48f356af21dfa6cd01ec6b1a9d *tests/testthat/test-googlePolylinels-package.R
