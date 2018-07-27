@@ -12,7 +12,7 @@
 
 <meta name="author" content="D Cooley" />
 
-<meta name="date" content="2018-05-25" />
+<meta name="date" content="2018-07-27" />
 
 <title>Google Polylines</title>
 
@@ -280,7 +280,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Google Polylines</h1>
 <h4 class="author"><em>D Cooley</em></h4>
-<h4 class="date"><em>2018-05-25</em></h4>
+<h4 class="date"><em>2018-07-27</em></h4>
 
 
 
@@ -453,13 +453,13 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <pre><code>##    AREA PERIMETER CNTY_ CNTY_ID NAME  FIPS FIPSNO CRESS_ID BIR74 SID74
 ## 1 0.114     1.442  1825    1825 Ashe 37009  37009        5  1091     1
 ##   NWBIR74 BIR79 SID79 NWBIR79                          geometry
-## 1      10  1364     0      19 MULTIPOLYGON (((-81.4727 36.23...</code></pre>
+## 1      10  1364     0      19 MULTIPOLYGON (((-81.472748 36....</code></pre>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">enc2 &lt;-<span class="st"> </span><span class="kw">wkt_polyline</span>(wkt)</a>
 <a class="sourceLine" id="cb26-2" data-line-number="2">enc2[<span class="dv">1</span>, ]</a></code></pre></div>
 <pre><code>##    AREA PERIMETER CNTY_ CNTY_ID NAME  FIPS FIPSNO CRESS_ID BIR74 SID74
 ## 1 0.114     1.442  1825    1825 Ashe 37009  37009        5  1091     1
 ##   NWBIR74 BIR79 SID79 NWBIR79                              geometry
-## 1      10  1364     0      19 MULTIPOLYGON: i_d|EjsgpNymFrhL{Enc...</code></pre>
+## 1      10  1364     0      19 MULTIPOLYGON: s_d|ErsgpNmmFrhL{Ebc...</code></pre>
 <p>I’ve provided these functions to enable the conversion of encoded polylines into other geometry formats, should they be required by other packages.</p>
 <div id="converting-to-sf" class="section level3">
 <h3>Converting to sf</h3>
@@ -469,15 +469,15 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <pre><code>## Geometry set for 100 features 
 ## geometry type:  MULTIPOLYGON
 ## dimension:      XY
-## bbox:           xmin: -84.3238 ymin: 33.882 xmax: -75.457 ymax: 36.5896
+## bbox:           xmin: -84.32384 ymin: 33.88199 xmax: -75.45697 ymax: 36.58964
 ## epsg (SRID):    NA
 ## proj4string:    NA
 ## First 5 geometries:</code></pre>
-<pre><code>## MULTIPOLYGON (((-81.4727 36.2343, -81.5408 36.2...</code></pre>
-<pre><code>## MULTIPOLYGON (((-81.2399 36.3654, -81.2407 36.3...</code></pre>
-<pre><code>## MULTIPOLYGON (((-80.4563 36.2425, -80.4764 36.2...</code></pre>
-<pre><code>## MULTIPOLYGON (((-76.009 36.3196, -76.0173 36.33...</code></pre>
-<pre><code>## MULTIPOLYGON (((-77.2177 36.241, -77.2346 36.21...</code></pre>
+<pre><code>## MULTIPOLYGON (((-81.47275 36.23435, -81.54084 3...</code></pre>
+<pre><code>## MULTIPOLYGON (((-81.23989 36.36536, -81.24068 3...</code></pre>
+<pre><code>## MULTIPOLYGON (((-80.45634 36.24255, -80.47638 3...</code></pre>
+<pre><code>## MULTIPOLYGON (((-76.00897 36.31959, -76.01734 3...</code></pre>
+<pre><code>## MULTIPOLYGON (((-77.21766 36.24098, -77.23461 3...</code></pre>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">## back to sf - use `as.data.frame` to remove sfencoded attributes</a>
 <a class="sourceLine" id="cb35-2" data-line-number="2">sf_wkt &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(wkt)</a>
 <a class="sourceLine" id="cb35-3" data-line-number="3">sf_wkt<span class="op">$</span>geometry &lt;-<span class="st"> </span><span class="kw">st_as_sfc</span>(sf_wkt<span class="op">$</span>geometry)</a>
@@ -487,16 +487,16 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <pre><code>## Simple feature collection with 6 features and 2 fields
 ## geometry type:  MULTIPOLYGON
 ## dimension:      XY
-## bbox:           xmin: -81.7411 ymin: 36.0728 xmax: -75.7731 ymax: 36.5896
+## bbox:           xmin: -81.74107 ymin: 36.07281 xmax: -75.77315 ymax: 36.58964
 ## epsg (SRID):    NA
 ## proj4string:    NA
 ##    AREA PERIMETER                       geometry
-## 1 0.114     1.442 MULTIPOLYGON (((-81.4727 36...
-## 2 0.061     1.231 MULTIPOLYGON (((-81.2399 36...
-## 3 0.143     1.630 MULTIPOLYGON (((-80.4563 36...
-## 4 0.070     2.968 MULTIPOLYGON (((-76.009 36....
-## 5 0.153     2.206 MULTIPOLYGON (((-77.2177 36...
-## 6 0.097     1.670 MULTIPOLYGON (((-76.7451 36...</code></pre>
+## 1 0.114     1.442 MULTIPOLYGON (((-81.47275 3...
+## 2 0.061     1.231 MULTIPOLYGON (((-81.23989 3...
+## 3 0.143     1.630 MULTIPOLYGON (((-80.45634 3...
+## 4 0.070     2.968 MULTIPOLYGON (((-76.00897 3...
+## 5 0.153     2.206 MULTIPOLYGON (((-77.21766 3...
+## 6 0.097     1.670 MULTIPOLYGON (((-76.74506 3...</code></pre>
 </div>
 </div>
 <div id="decoding" class="section level2">

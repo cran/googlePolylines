@@ -4,17 +4,20 @@ context("encode")
 ## - sf_GEOMETRY
 
 test_that("google's example encodes correctly", {
-  
-  df <- data.frame(lat = c(38.5, 40.7, 43.252),
-                   lon = c(-120.2, -120.95, -126.453))
-  
+  df <- data.frame(lat = c(38.5, 40.7, 43.252), lon = c(-120.2, -120.95, -126.453))
   expect_true(encode(df) == "_p~iF~ps|U_ulLnnqC_mqNvxq`@")
 })
 
-
-test_that("encode coordinates algorithim works", {
+test_that("encoding by row is accurate", {
   
   testthat::skip_on_cran()
+  
+  df <- data.frame(lat = c(38, 40, 43),lon = c(-120, -120, -126))
+  expect_true(length(encode(df, byrow = T)) == 3)
+  expect_equal(df, do.call(rbind, decode( encode( df, byrow = T ) ) ))
+})
+
+test_that("encode coordinates algorithim works", {
   expect_equal(
     encodeCoordinates(lon = c(144.9731, 144.9729, 144.9731), 
                       lat = c(-37.8090, -37.8094, -37.8083)),
@@ -25,15 +28,13 @@ test_that("encode coordinates algorithim works", {
 test_that("*POINTs are encoded", {
 
   testthat::skip_on_cran()
-  
+  library(sf)
   encode14437 <- "~py`F__|mZ"
   encode14537 <- "~py`F_i_tZ"
   
-  ## sfc
   point <- sf::st_sfc(sf::st_point(x = c(144, -37)))
   expect_true(encode(point)[[1]] == encode14437)
 
-  ## sf
   sf <- sf::st_sf(point)
   expect_true(encode(sf)[, 'point'][[1]] == encode14437)
   multipoint <- sf::st_sfc(sf::st_multipoint(x = matrix(c(144, 145, -37, -37), ncol = 2)))
@@ -46,7 +47,7 @@ test_that("*POINTs are encoded", {
 test_that("UNKNOWN geometry & sf type", {
   
   testthat::skip_on_cran()
-  
+  library(sf)
   point <- sf::st_sfc(sf::st_point(x = c(144, -37)))
   class(point) <- c("sfc_NEWPOINT", "sfc")
   expect_error(encode(point),"encoding this sf type is currently not supported")
@@ -58,7 +59,7 @@ test_that("UNKNOWN geometry & sf type", {
 test_that("*LINES are encoded", {
 
   testthat::skip_on_cran()
-  
+  library(sf)
   encodedLine <- "~py`F__|mZ~oR_pR~oR}oR"
   line <- sf::st_sfc(sf::st_linestring(matrix(c(144, 144.1, 144.2, -37, -37.1, -37.2), ncol = 2)))
   expect_true(encode(line)[[1]] == encodedLine)
@@ -66,12 +67,8 @@ test_that("*LINES are encoded", {
   expect_true(encode(sf)[[1]] == encodedLine)
   multilinestring <- sf::st_sfc(
     sf::st_multilinestring(
-      list(
-        matrix(c(144, 144.1, 144.2, -37, -37.1, -37.2), ncol =2),
-        matrix(c(144, 144.1, 144.2, -37, -37.1, -37.2), ncol =2)
-        )
-      )
-    )
+      list(matrix(c(144, 144.1, 144.2, -37, -37.1, -37.2), ncol =2),
+           matrix(c(144, 144.1, 144.2, -37, -37.1, -37.2), ncol =2))))
   expect_true(encode(multilinestring)[[1]][1] == encodedLine)
   expect_true(encode(multilinestring)[[1]][2] == encodedLine)
 })
@@ -79,11 +76,10 @@ test_that("*LINES are encoded", {
 test_that("*POLYGONS are encoded", {
 
   testthat::skip_on_cran()
-  
+  library(sf)
   encodedLine <- "~py`F__|mZ~oR_pR~oR}oR_af@|`f@"
   polygon <- sf::st_sfc(sf::st_polygon(
-    list(matrix(c(144, 144.1, 144.2, 144, -37, -37.1, -37.2, -37), ncol = 2))
-    ))
+    list(matrix(c(144, 144.1, 144.2, 144, -37, -37.1, -37.2, -37), ncol = 2))))
   expect_true(encode(polygon)[[1]] == "~py`F__|mZ~oR_pR~oR}oR_af@|`f@")
   sf <- sf::st_sf(geo = polygon)
   expect_true(encode(sf)[[1]] == "~py`F__|mZ~oR_pR~oR}oR_af@|`f@")
@@ -99,7 +95,7 @@ test_that("*POLYGONS are encoded", {
 test_that("sf_GEOMETRYs are encoded", {
   
   testthat::skip_on_cran()
-  
+  library(sf)
   df <- data.frame(myId = c(1,1,1,1,1,1,1,1,2,2,2,2),
                    lineId = c(1,1,1,1,2,2,2,2,1,1,1,2),
                    lon = c(-80.190, -66.118, -64.757, -80.190,  -70.579, -67.514, -66.668, -70.579, -70, -49, -51, -70),
@@ -135,9 +131,7 @@ test_that("sf_GEOMETRYs are encoded", {
 
 
 test_that("data.frames are encoded", {
-  
   testthat::skip_on_cran()
-  
   df <- data.frame(polygonId = c(1,1,1,1),
     lineId = c(1,1,1,1),
     lon = c(-80.190, -66.118, -64.757, -80.190),
@@ -146,7 +140,6 @@ test_that("data.frames are encoded", {
 })
 
 test_that("default encoding method errors", {
-  testthat::skip_on_cran()
   expect_error(encode(list()),"I currently don't know how to encode list objects")
   expect_error(encode(NULL),"I currently don't know how to encode NULL objects")
 })
@@ -154,7 +147,7 @@ test_that("default encoding method errors", {
 test_that("GEOMETRYCOLLECTIONS error", {
   
   testthat::skip_on_cran()
-  
+  library(sf)
   df <- data.frame(myId = c(1,1,1,1,1,1,1,1,2,2,2,2),
                    lineId = c(1,1,1,1,2,2,2,2,1,1,1,2),
                    lon = c(-80.190, -66.118, -64.757, -80.190,  -70.579, -67.514, -66.668, -70.579, -70, -49, -51, -70),
