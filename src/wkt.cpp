@@ -42,6 +42,7 @@ void beginWKT(std::ostringstream& os, Rcpp::CharacterVector cls) {
   
   int tp;
   geom_type(cls[1], &tp);
+  //geom_type(cls[0], &tp);  // iff removing XY and sfg attributs
   
   switch( tp ) {
   case POINT:
@@ -72,6 +73,7 @@ void endWKT(std::ostringstream& os, Rcpp::CharacterVector cls) {
   
   int tp;
   geom_type(cls[1], &tp);
+  //geom_type(cls[0], &tp);
   
   switch( tp ) {
   case POINT:
@@ -103,7 +105,7 @@ void coordSeparateWKT(std::ostringstream& os) {
 }
 
 // [[Rcpp::export]]
-Rcpp::StringVector polyline_to_wkt(Rcpp::List sfencoded) {
+Rcpp::StringVector rcpp_polyline_to_wkt(Rcpp::List sfencoded) {
   
   unsigned int nrow = sfencoded.size();
   Rcpp::StringVector res(nrow);
@@ -318,7 +320,7 @@ void encode_wkt_multi_polygon(MultiPolygon const& mpl, std::ostringstream& os) {
 }
 
 // [[Rcpp::export]]
-Rcpp::List wkt_to_polyline(Rcpp::StringVector wkt) {
+Rcpp::List rcpp_wkt_to_polyline(Rcpp::StringVector wkt) {
   
   size_t n = wkt.length();
   Rcpp::String r_wkt;
@@ -337,10 +339,14 @@ Rcpp::List wkt_to_polyline(Rcpp::StringVector wkt) {
     str_wkt = r_wkt;
     geomType = geomFromWKT(str_wkt);
     
+    
     Rcpp::CharacterVector cls(3);
     cls[0] = "XY";
     cls[1] = geomType;
     cls[2] = "sfg";
+    
+    //Rcpp::CharacterVector cls(1);
+    //cls[0] = geomType;
     
     if (geomType == "POINT" ) {
       
