@@ -16,7 +16,7 @@ A **fast** and light-weight implementation of [Google's polyline encoding algori
 
 ## Installation
 
-Version 0.6.2 is on CRAN and can be installed through
+Version 0.7.0 is on CRAN and can be installed through
 
 ```r
 install.packages("googlePolylines")
@@ -144,41 +144,48 @@ enc2 <- wkt_polyline(wkt)
 
 ## Motivation
 
-Encoding coordinates into polylines reduces the size of objects and can increase the speed in plotting Google Maps
+Encoding coordinates into polylines reduces the size of objects and can increase the speed in plotting Google Maps and Mapdeck
 
 
 ```r
 library(sf)
-nc <- st_read(system.file("shape/nc.shp", package="sf"))
+library(geojsonsf)
+sf <- geojsonsf::geojson_sf("https://raw.githubusercontent.com/SymbolixAU/data/master/geojson/SA1_2016_VIC.json")
 
-encoded <- encode(nc, FALSE)
-encodedLite <- encode(nc, TRUE)
+encoded <- encode(sf, FALSE)
+encodedLite <- encode(sf, TRUE)
 
-vapply(mget(c('nc', 'encoded', 'encodedLite') ), function(x) { format(object.size(x), units = "Kb") }, '')
-#         nc   encoded  encodedLite 
-# "132.2 Kb"  "83.3 Kb"   "50.5 Kb"
+vapply(mget(c('sf', 'encoded', 'encodedLite') ), function(x) { format(object.size(x), units = "Kb") }, '')
+#           sf      encoded  encodedLite 
+# "38750.7 Kb" "14707.9 Kb"  "9649.8 Kb"
 ```
 
 ```r
-library(leaflet)
 library(microbenchmark)
 library(sf)
+library(geojsonsf)
+library(leaflet)
 library(googleway)
+library(mapdeck)
 
-nc <- st_read(system.file("shape/nc.shp", package="sf"))
+sf <- geojsonsf::geojson_sf("https://raw.githubusercontent.com/SymbolixAU/data/master/geojson/SA1_2016_VIC.json")
 
 microbenchmark(
 
   google = {
-    df <- encode(nc)
 
     ## you need a Google Map API key to use this function
     google_map(key = mapKey) %>%
-      add_polygons(data = df, polyline = "geometry")
+      add_polygons(data = sf)
+  },
+  
+  mapdeck = {
+    mapdeck(token = mapKey) %>%
+      add_polygon(data = sf)
   },
 
   leaflet = {
-    leaflet(nc) %>%
+    leaflet(sf) %>%
       addTiles() %>%
       addPolygons()
   },
@@ -186,9 +193,10 @@ microbenchmark(
 )
 
 # Unit: milliseconds
-#     expr      min        lq     mean    median       uq      max neval
-#   google  8.16810  9.164254 10.18863  9.776755 11.50545 13.22828    25
-#  leaflet 53.90745 58.151913 61.50368 60.217514 64.08792 74.51588    25
+#     expr       min        lq      mean    median        uq       max neval
+#   google  530.4193  578.3035  644.9472  606.3328  726.4577  897.9064    25
+#  mapdeck  527.7255  577.2322  628.5800  600.7449  682.2697  792.8950    25
+#  leaflet 3247.3318 3445.6265 3554.7433 3521.6720 3654.1177 4109.6708    25
  
 ```
 These benchmarks don't account for the time taken for the browswer to render the maps

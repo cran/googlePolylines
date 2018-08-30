@@ -112,18 +112,18 @@ void encode_point( std::ostringstream& os, std::ostringstream& oszm, Rcpp::Numer
   encodedString = encode_polyline(lon, lat);
   addToStream(os, encodedString);
   
-  if ( dim_divisor > 2 ) {
-    Rcpp::NumericVector elev(1);
-    Rcpp::NumericVector meas(1);
-    
-    elev[0] = point[2];
-    if (dim_divisor == 4 ) {
-      meas[0] = point[3];
-    }
-    
-    encodedString = encode_polyline(elev, meas);
-    addToStream(oszm, encodedString);
-  }
+  // if ( dim_divisor > 2 ) {
+  //   Rcpp::NumericVector elev(1);
+  //   Rcpp::NumericVector meas(1);
+  //   
+  //   elev[0] = point[2];
+  //   if (dim_divisor == 4 ) {
+  //     meas[0] = point[3];
+  //   }
+  //   
+  //   encodedString = encode_polyline(elev, meas);
+  //   addToStream(oszm, encodedString);
+  // }
   
 }
 
@@ -144,13 +144,13 @@ void encode_points( std::ostringstream& os, std::ostringstream& oszm, Rcpp::Nume
     encodedString = encode_polyline( pointLon, pointLat );
     addToStream(os, encodedString);
     
-    if ( dim_divisor > 2 ) {
-      elev[0] = point(i, 2);
-      meas[0] = dim_divisor == 4 ? point(i, 3) : 0;
-      
-      encodedString = encode_polyline( elev, meas );
-      addToStream(oszm, encodedString);
-    }
+    // if ( dim_divisor > 2 ) {
+    //   elev[0] = point(i, 2);
+    //   meas[0] = dim_divisor == 4 ? point(i, 3) : 0;
+    //   
+    //   encodedString = encode_polyline( elev, meas );
+    //   addToStream(oszm, encodedString);
+    // }
     
   }
   
@@ -180,19 +180,19 @@ void encode_vector( std::ostringstream& os, std::ostringstream& oszm, Rcpp::List
   encodedString = encode_polyline(lons, lats);
   addToStream(os, encodedString);
   
-  if (dim_divisor > 2) {
-    // there are Z and M attributes to encode
-    // constructor sets them to 0
-    Rcpp::NumericVector elev(n);
-    Rcpp::NumericVector meas(n);
-    
-    for (int i = 0; i < n; i++) {
-      elev[i] = vec[(i + n + n)];
-      meas[i] = dim_divisor == 4 ? vec[(i + n + n + n)] : 0;
-    }
-    encodedString = encode_polyline(elev, meas);
-    addToStream(oszm, encodedString);
-  }
+  // if (dim_divisor > 2) {
+  //   // there are Z and M attributes to encode
+  //   // constructor sets them to 0
+  //   Rcpp::NumericVector elev(n);
+  //   Rcpp::NumericVector meas(n);
+  //   
+  //   for (int i = 0; i < n; i++) {
+  //     elev[i] = vec[(i + n + n)];
+  //     meas[i] = dim_divisor == 4 ? vec[(i + n + n + n)] : 0;
+  //   }
+  //   encodedString = encode_polyline(elev, meas);
+  //   addToStream(oszm, encodedString);
+  // }
   
 }
 
@@ -217,19 +217,19 @@ void encode_matrix(std::ostringstream& os, std::ostringstream& oszm, Rcpp::Numer
   encodedString = encode_polyline(lons, lats);
   addToStream(os, encodedString);
   
-  if (dim_divisor > 2 ) {
-    int n = mat.size() / dim_divisor;
-    Rcpp::NumericVector elev(n);
-    Rcpp::NumericVector meas(n);
-    if( dim_divisor == 3 ) {
-      elev = mat(_, 2);
-    } else if ( dim_divisor == 4 ) { 
-      elev = mat(_, 2);
-      meas = mat(_, 3);
-    }
-    encodedString = encode_polyline(elev, meas);
-    addToStream(oszm, encodedString);
-  }
+  // if (dim_divisor > 2 ) {
+  //   int n = mat.size() / dim_divisor;
+  //   Rcpp::NumericVector elev(n);
+  //   Rcpp::NumericVector meas(n);
+  //   if( dim_divisor == 3 ) {
+  //     elev = mat(_, 2);
+  //   } else if ( dim_divisor == 4 ) { 
+  //     elev = mat(_, 2);
+  //     meas = mat(_, 3);
+  //   }
+  //   encodedString = encode_polyline(elev, meas);
+  //   addToStream(oszm, encodedString);
+  // }
   
 }
 
@@ -243,9 +243,9 @@ void write_matrix_list(std::ostringstream& os, std::ostringstream& oszm, Rcpp::L
   }
   addToStream(os, SPLIT_CHAR);
   
-  if (dim_divisor > 2) {
-    addToStream(oszm, SPLIT_CHAR);
-  }
+  // if (dim_divisor > 2) {
+  //   addToStream(oszm, SPLIT_CHAR);
+  // }
 }
 
 void write_geometry(std::ostringstream& os, std::ostringstream& oszm, SEXP s, 
@@ -308,7 +308,6 @@ Rcpp::List rcpp_encodeSfGeometry(Rcpp::List sfc, bool strip){
   
   for (int i = 0; i < sfc.size(); i++){
 
-    
     std::ostringstream os;
     std::ostringstream oszm;   
     Rcpp::checkUserInterrupt();
@@ -320,35 +319,35 @@ Rcpp::List rcpp_encodeSfGeometry(Rcpp::List sfc, bool strip){
     write_data(os, oszm, sfg_dim, dim_divisor, sfc[i], cls_attr[0], 0);
 
     std::string str = os.str();
-    std::string zmstr = oszm.str();
+    // std::string zmstr = oszm.str();
     
     std::vector< std::string > strs = split(str, ' ');
-    std::vector< std::string > zmstrs = split(zmstr, ' ');
+    // std::vector< std::string > zmstrs = split(zmstr, ' ');
     
     lastItem = strs.size() - 1;
     
     if (strs[lastItem] == "-") {
       strs.erase(strs.end() - 1);
-      if (dim_divisor > 2 ) {
-        zmstrs.erase(zmstrs.end() - 1);
-      }
+      // if (dim_divisor > 2 ) {
+      //   zmstrs.erase(zmstrs.end() - 1);
+      // }
     }
 
     Rcpp::CharacterVector sv = wrap( strs );
-    Rcpp::CharacterVector zmsv = wrap( zmstrs );
+    // Rcpp::CharacterVector zmsv = wrap( zmstrs );
 
     if(strip == FALSE) {
       sv.attr("sfc") = as< Rcpp::CharacterVector >( sfg_dim );
-      zmsv.attr("zm") = as< Rcpp::CharacterVector >( sfg_dim[0] );
+      // zmsv.attr("zm") = as< Rcpp::CharacterVector >( sfg_dim[0] );
     }
     output[i] = sv;
-    output_zm[i] = zmsv;
+    // output_zm[i] = zmsv;
   }
   
   // TODO(only return zm stream IFF there are dim attributes?)
-  return Rcpp::List::create(
-    _["XY"] = output,
-    _["ZM"] = output_zm
-  );
-  //return output;
+  // return Rcpp::List::create(
+  //   _["XY"] = output
+  //   _["ZM"] = output_zm
+  // );
+  return output;
 }
