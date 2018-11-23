@@ -31,31 +31,31 @@ BEGIN_RCPP
 END_RCPP
 }
 // rcpp_decode_polyline
-Rcpp::List rcpp_decode_polyline(Rcpp::StringVector encodedStrings, std::string encoded_type);
+Rcpp::List rcpp_decode_polyline(Rcpp::StringVector encodedStrings, Rcpp::String encoded_type);
 RcppExport SEXP _googlePolylines_rcpp_decode_polyline(SEXP encodedStringsSEXP, SEXP encoded_typeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::StringVector >::type encodedStrings(encodedStringsSEXP);
-    Rcpp::traits::input_parameter< std::string >::type encoded_type(encoded_typeSEXP);
+    Rcpp::traits::input_parameter< Rcpp::String >::type encoded_type(encoded_typeSEXP);
     rcpp_result_gen = Rcpp::wrap(rcpp_decode_polyline(encodedStrings, encoded_type));
     return rcpp_result_gen;
 END_RCPP
 }
 // rcpp_encode_polyline
-Rcpp::String rcpp_encode_polyline(Rcpp::NumericVector longitude, Rcpp::NumericVector latitude);
+std::string rcpp_encode_polyline(std::vector<double> longitude, std::vector<double> latitude);
 RcppExport SEXP _googlePolylines_rcpp_encode_polyline(SEXP longitudeSEXP, SEXP latitudeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type longitude(longitudeSEXP);
-    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type latitude(latitudeSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type longitude(longitudeSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type latitude(latitudeSEXP);
     rcpp_result_gen = Rcpp::wrap(rcpp_encode_polyline(longitude, latitude));
     return rcpp_result_gen;
 END_RCPP
 }
 // rcpp_encode_polyline_byrow
-Rcpp::StringVector rcpp_encode_polyline_byrow(Rcpp::NumericVector longitude, Rcpp::NumericVector latitude);
+std::vector<std::string> rcpp_encode_polyline_byrow(Rcpp::NumericVector longitude, Rcpp::NumericVector latitude);
 RcppExport SEXP _googlePolylines_rcpp_encode_polyline_byrow(SEXP longitudeSEXP, SEXP latitudeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

@@ -32,25 +32,39 @@ using namespace Rcpp;
 #define XYM       3
 #define XYZM      4
 
-void addToStream(std::ostringstream& os, Rcpp::String encodedString ) ; 
+void addToStream(std::ostringstream& os) ; 
 
 template<typename Out>
 void split(const std::string &s, char delim, Out result);
 
-std::vector<std::string> split(const std::string &s, char delim);
+void split(const std::string &s, char delim);
 
 Rcpp::CharacterVector getSfClass(SEXP sf);
 
-Rcpp::DataFrame decode_polyline(std::string encoded, std::string encoded_type);
+Rcpp::List decode_polyline(std::string encoded, 
+                           std::vector<std::string>& col_headers, 
+                           std::vector<double>& pointsLat, 
+                           std::vector<double>& pointsLon);
 
-Rcpp::String EncodeNumber(int num);
+std::vector<std::string> get_col_headers(Rcpp::String sfg_dim);
 
-Rcpp::String EncodeSignedNumber(int num);
+Rcpp::List na_dataframe(std::vector<std::string>& col_headers);
 
-Rcpp::String encode_polyline(Rcpp::NumericVector latitude,
-                             Rcpp::NumericVector longitude);
+void EncodeNumber(std::ostringstream& os, int num);
+
+void EncodeSignedNumber(std::ostringstream& os, int num);
+
+std::string encode_polyline();
 
 Rcpp::List decode_data(Rcpp::StringVector pl,
                  const char *cls = NULL);
+
+
+namespace global_vars {
+  extern std::vector<double> lons;
+  extern std::vector<double> lats;
+  extern std::string encodedString;
+  extern std::vector<std::string> elems;
+}
 
 #endif

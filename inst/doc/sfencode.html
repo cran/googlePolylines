@@ -12,7 +12,7 @@
 
 <meta name="author" content="D Cooley" />
 
-<meta name="date" content="2018-08-30" />
+<meta name="date" content="2018-11-23" />
 
 <title>Google Polylines</title>
 
@@ -280,7 +280,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Google Polylines</h1>
 <h4 class="author"><em>D Cooley</em></h4>
-<h4 class="date"><em>2018-08-30</em></h4>
+<h4 class="date"><em>2018-11-23</em></h4>
 
 
 
@@ -459,7 +459,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <pre><code>##    AREA PERIMETER CNTY_ CNTY_ID NAME  FIPS FIPSNO CRESS_ID BIR74 SID74
 ## 1 0.114     1.442  1825    1825 Ashe 37009  37009        5  1091     1
 ##   NWBIR74 BIR79 SID79 NWBIR79                              geometry
-## 1      10  1364     0      19 MULTIPOLYGON: s_d|ErsgpNmmFrhL{Ebc...</code></pre>
+## 1      10  1364     0      19 MULTIPOLYGON: erenEdma_NcvDgbCmhEw...</code></pre>
 <p>I’ve provided these functions to enable the conversion of encoded polylines into other geometry formats, should they be required by other packages.</p>
 <div id="converting-to-sf" class="section level3">
 <h3>Converting to sf</h3>
@@ -526,7 +526,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <h2>Benchmarking</h2>
 <p>You will note that the encoded strings are different between the two <code>enc</code> objects created earlier. For example</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">enc[<span class="dv">1</span>, <span class="st">'geometry'</span>][[<span class="dv">1</span>]] <span class="op">==</span><span class="st"> </span>enc2[<span class="dv">1</span>, <span class="st">'geometry'</span>][[<span class="dv">1</span>]]</a></code></pre></div>
-<pre><code>## [1] FALSE</code></pre>
+<pre><code>## [1] FALSE FALSE</code></pre>
 <p>This results from the <strong>lossy</strong>-ness of the encoding. However, the general shape of the information is preserved. These two maps are plots of the <code>enc</code> and <code>enc2</code> objects respectively:</p>
 <pre><code>library(googleway)
 
