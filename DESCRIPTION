@@ -1,8 +1,8 @@
 Package: googlePolylines
 Type: Package
 Title: Encoding Coordinates into 'Google' Polylines
-Version: 0.8.0
-Date: 2020-10-28
+Version: 0.8.1
+Date: 2020-10-31
 Authors@R: c(
     person("David", "Cooley", ,"dcooley@symbolix.com.au", role = c("aut", "cre")),
     person("Paulo", "Barcelos", role = "ctb", comment = "Author of c++ decode_polyline"),
@@ -20,10 +20,10 @@ RoxygenNote: 7.1.0
 Suggests: covr, knitr, rmarkdown, sf, sfheaders, testthat
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2020-10-27 22:10:12 UTC; dave
+Packaged: 2020-10-31 01:07:52 UTC; dave
 Author: David Cooley [aut, cre],
   Paulo Barcelos [ctb] (Author of c++ decode_polyline),
   Chris Muir [ctb]
 Maintainer: David Cooley <dcooley@symbolix.com.au>
 Repository: CRAN
-Date/Publication: 2020-10-27 22:40:02 UTC
+Date/Publication: 2020-11-01 05:30:19 UTC

@@ -12,7 +12,7 @@
 
 <meta name="author" content="D Cooley" />
 
-<meta name="date" content="2020-10-28" />
+<meta name="date" content="2020-10-31" />
 
 <title>Google Polylines</title>
 
@@ -303,7 +303,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Google Polylines</h1>
 <h4 class="author">D Cooley</h4>
-<h4 class="date">2020-10-28</h4>
+<h4 class="date">2020-10-31</h4>
 
 
 
@@ -527,8 +527,6 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb37-4"><a href="#cb37-4"></a>)</span>
 <span id="cb37-5"><a href="#cb37-5"></a></span>
 <span id="cb37-6"><a href="#cb37-6"></a><span class="kw">decode</span>(polylines)</span></code></pre></div>
-<pre><code>## &quot;ohlbDnbmhN~suq@am{tAw`qsAeyhGvkz`@fge}A&quot; &quot;ggmnDt}wmLgc`DesuQvvrLofdDorqGtzzV&quot;
-## &quot;ohlbDnbmhN~suq@am{tAw`qsAeyhGvkz`@fge}A&quot; &quot;ggmnDt}wmLgc`DesuQvvrLofdDorqGtzzV&quot;</code></pre>
 <pre><code>## [[1]]
 ##      lat       lon
 ## 1 26.774 -80.18999
@@ -546,7 +544,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div id="benchmarking" class="section level2">
 <h2>Benchmarking</h2>
 <p>You will note that the encoded strings are different between the two <code>enc</code> objects created earlier. For example</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>enc[<span class="dv">1</span>, <span class="st">&#39;geometry&#39;</span>][[<span class="dv">1</span>]] <span class="op">==</span><span class="st"> </span>enc2[<span class="dv">1</span>, <span class="st">&#39;geometry&#39;</span>][[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>enc[<span class="dv">1</span>, <span class="st">&#39;geometry&#39;</span>][[<span class="dv">1</span>]] <span class="op">==</span><span class="st"> </span>enc2[<span class="dv">1</span>, <span class="st">&#39;geometry&#39;</span>][[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## [1] FALSE FALSE</code></pre>
 <p>This results from the <strong>lossy</strong>-ness of the encoding. However, the general shape of the information is preserved. These two maps are plots of the <code>enc</code> and <code>enc2</code> objects respectively:</p>
 <pre><code>library(googleway)

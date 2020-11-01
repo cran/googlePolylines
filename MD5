@@ -1,7 +1,7 @@
-be2ec97fec85a7fe2e462123e29a9dfc *DESCRIPTION
+64a08b3f44255c881600d55ec063ecad *DESCRIPTION
 44d9f802990ed50356604f19f6005bab *LICENSE
 640fe79de368bc773b29e2c5440d6c43 *NAMESPACE
-ff786b574f8ec04911a4fd81579b8490 *NEWS.md
+3424ff516a8800512d9aefc1113bb47a *NEWS.md
 a5e0a7bdd2330da5cd6954b82053809a *R/Decode.R
 070426d1e57ddf53edcae56ef84482b3 *R/Encode.R
 00448a2d68f6a13e252c798c85f86698 *R/RcppExports.R
@@ -15,7 +15,7 @@ eeaf15bcff56489ac1afae4317d5d2ae *R/scratch.R
 e4699fda382b76e41c746fb5febbbe2b *build/vignette.rds
 4f418c5f7865c36be88145d554424ba7 *inst/doc/sfencode.R
 104effc548588776e036e7937bed05e0 *inst/doc/sfencode.Rmd
-89321a039d64e64f8fce6b2d790b93f9 *inst/doc/sfencode.html
+74902f9cc82aaa0bf0a0d68254da6da5 *inst/doc/sfencode.html
 171a9a0c7c19767269934c9d2e0d1512 *inst/include/googlePolylines.h
 4cc046183f4ba79b61b86d4b5b2b196e *inst/include/variants.h
 b1e54a94db9fb1e84171bf321d93783c *inst/include/wkt.h
@@ -31,7 +31,7 @@ fc7994fcc2a71fb8539a52d1e77fb103 *man/wkt_polyline.Rd
 8582c19e928ec1bb35d0dcff31025b45 *src/Makevars.win
 57842759149cffcdb702826fc4a05b07 *src/RcppExports.cpp
 6507175a1cc88eac1fbf0503e7d0cef1 *src/encode.cpp
-039ba696c5a2e85e49f37ef9696ee821 *src/googlePolylines.cpp
+5afbf008dae9144273235387edec1a5e *src/googlePolylines.cpp
 360c29be5cdef89faafdcb160b4f2081 *src/wkt.cpp
 bc84e591963599110963f739ed238251 *tests/testthat.R
 2e2ff076b2254a5bf5cf0f304d3f0d4c *tests/testthat/test-Decode.R
