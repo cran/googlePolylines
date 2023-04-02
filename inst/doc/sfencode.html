@@ -12,142 +12,106 @@
 
 <meta name="author" content="D Cooley" />
 
-<meta name="date" content="2020-12-15" />
+<meta name="date" content="2023-04-03" />
 
 <title>Google Polylines</title>
 
-<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
-// v0.0.1
-// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
-
-document.addEventListener('DOMContentLoaded', function() {
-  const codeList = document.getElementsByClassName("sourceCode");
-  for (var i = 0; i < codeList.length; i++) {
-    var linkList = codeList[i].getElementsByTagName('a');
-    for (var j = 0; j < linkList.length; j++) {
-      if (linkList[j].innerHTML === "") {
-        linkList[j].setAttribute('aria-hidden', 'true');
-      }
-    }
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
   }
 });
 </script>
+
 <style type="text/css">
-a.anchor-section {margin-left: 10px; visibility: hidden; color: inherit;}
-a.anchor-section::before {content: '#';}
-.hasAnchor:hover a.anchor-section {visibility: visible;}
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
 </style>
-<script>// Anchor sections v1.0 written by Atsushi Yasumoto on Oct 3rd, 2020.
-document.addEventListener('DOMContentLoaded', function() {
-  // Do nothing if AnchorJS is used
-  if (typeof window.anchors === 'object' && anchors.hasOwnProperty('hasAnchorJSLink')) {
-    return;
-  }
 
-  const h = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
-
-  // Do nothing if sections are already anchored
-  if (Array.from(h).some(x => x.classList.contains('hasAnchor'))) {
-    return null;
-  }
-
-  // Use section id when pandoc runs with --section-divs
-  const section_id = function(x) {
-    return ((x.classList.contains('section') || (x.tagName === 'SECTION'))
-            ? x.id : '');
-  };
-
-  // Add anchors
-  h.forEach(function(x) {
-    const id = x.id || section_id(x.parentElement);
-    if (id === '') {
-      return null;
-    }
-    let anchor = document.createElement('a');
-    anchor.href = '#' + id;
-    anchor.classList = ['anchor-section'];
-    x.classList.add('hasAnchor');
-    x.appendChild(anchor);
-  });
-});
-</script>
 
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
-
-
-<style type="text/css">code{white-space: pre;}</style>
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
-  { counter-reset: source-line 0; }
+{ counter-reset: source-line 0; }
 pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
+{ position: relative; left: -4em; counter-increment: source-line; }
 pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -170,6 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 })();
 </script>
+
 
 
 
@@ -367,58 +332,73 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Google Polylines</h1>
 <h4 class="author">D Cooley</h4>
-<h4 class="date">2020-12-15</h4>
+<h4 class="date">2023-04-03</h4>
 
 
 
-<p>The goal of <strong>googlePolylines</strong> is to encode and decode coordinates using <a href="https://developers.google.com/maps/documentation/utilities/polylinealgorithm">Google’s polyline encoding algorithm</a></p>
+<p>The goal of <strong>googlePolylines</strong> is to encode and decode
+coordinates using <a href="https://developers.google.com/maps/documentation/utilities/polylinealgorithm">Google’s
+polyline encoding algorithm</a></p>
 <blockquote>
-<p>Polyline encoding is a lossy compression algorithm that allows you to store a series of coordinates as a single string.</p>
+<p>Polyline encoding is a lossy compression algorithm that allows you to
+store a series of coordinates as a single string.</p>
 </blockquote>
-<p>Encoded polylines are used by Google Maps to draw lines and polygons, and are therefore supported in the <a href="https://CRAN.R-project.org/package=googleway">googleway</a> package.</p>
-<p>I am intending to update <code>googleway</code> to support plotting <code>sf</code> objects using these encoded polylines.</p>
+<p>Encoded polylines are used by Google Maps to draw lines and polygons,
+and are therefore supported in the <a href="https://CRAN.R-project.org/package=googleway">googleway</a>
+package.</p>
+<p>I am intending to update <code>googleway</code> to support plotting
+<code>sf</code> objects using these encoded polylines.</p>
 <div id="caution" class="section level2">
 <h2>Caution</h2>
-<p>The word <strong>lossy</strong> is important to keep in mind, as the encoding process could reduce precision of your data. If you are after highly accurate coordinates this process probably isn’t for you.</p>
-<p>However, if you need to reduce the size of spatial objects/data, and want quicker plots (see the <strong>Benchmarking</strong> section), then this could help.</p>
+<p>The word <strong>lossy</strong> is important to keep in mind, as the
+encoding process could reduce precision of your data. If you are after
+highly accurate coordinates this process probably isn’t for you.</p>
+<p>However, if you need to reduce the size of spatial objects/data, and
+want quicker plots (see the <strong>Benchmarking</strong> section), then
+this could help.</p>
 </div>
 <div id="encoding" class="section level2">
 <h2>Encoding</h2>
 <p>Encoding is split across two functions</p>
 <ul>
-<li><code>encode(obj)</code> - designed for use on <code>sf</code> objects and <code>data.frames</code></li>
-<li><code>encodeCoordinates(lon, lat)</code> - designed to encode vectors of coordinates</li>
+<li><code>encode(obj)</code> - designed for use on <code>sf</code>
+objects and <code>data.frames</code></li>
+<li><code>encodeCoordinates(lon, lat)</code> - designed to encode
+vectors of coordinates</li>
 </ul>
 <div id="vectors" class="section level3">
 <h3>vectors</h3>
 <p>Given two vectors of longitude and latitude coordinates:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(googlePolylines)</span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>lon &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">144.9709</span>, <span class="fl">144.9713</span>, <span class="fl">144.9715</span>, <span class="fl">144.9719</span>, <span class="fl">144.9728</span>, <span class="fl">144.9732</span>, </span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fl">144.973</span>, <span class="fl">144.9727</span>, <span class="fl">144.9731</span>, <span class="fl">144.9749</span>, <span class="fl">144.9742</span>)</span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>lat &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">37.8075</span>, <span class="fl">-37.8076</span>, <span class="fl">-37.8076</span>, <span class="fl">-37.8078</span>, <span class="fl">-37.8079</span>, <span class="fl">-37.8079</span>, </span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="fl">-37.8091</span>, <span class="fl">-37.8107</span>, <span class="fl">-37.8115</span>, <span class="fl">-37.8153</span>, <span class="fl">-37.8155</span>)</span>
-<span id="cb1-8"><a href="#cb1-8"></a></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="kw">encodeCoordinates</span>(lon, lat)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googlePolylines)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>lon <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">144.9709</span>, <span class="fl">144.9713</span>, <span class="fl">144.9715</span>, <span class="fl">144.9719</span>, <span class="fl">144.9728</span>, <span class="fl">144.9732</span>, </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fl">144.973</span>, <span class="fl">144.9727</span>, <span class="fl">144.9731</span>, <span class="fl">144.9749</span>, <span class="fl">144.9742</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>lat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">37.8075</span>, <span class="sc">-</span><span class="fl">37.8076</span>, <span class="sc">-</span><span class="fl">37.8076</span>, <span class="sc">-</span><span class="fl">37.8078</span>, <span class="sc">-</span><span class="fl">37.8079</span>, <span class="sc">-</span><span class="fl">37.8079</span>, </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fl">37.8091</span>, <span class="sc">-</span><span class="fl">37.8107</span>, <span class="sc">-</span><span class="fl">37.8115</span>, <span class="sc">-</span><span class="fl">37.8153</span>, <span class="sc">-</span><span class="fl">37.8155</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">encodeCoordinates</span>(lon, lat)</span></code></pre></div>
 <pre><code>## [1] &quot;xgweFcsysZToA?g@f@oAPsD?oApFf@|Hz@`DmAvViJf@jC&quot;</code></pre>
 </div>
 <div id="data.frame" class="section level3">
 <h3>data.frame</h3>
-<p>The <code>encode()</code> function will attempt to find the lon &amp; lat columns inside a data.frame using regex matching. However, you can also specify the columns of coordinates:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="dt">lon =</span> <span class="kw">c</span>(<span class="fl">144.9709</span>, <span class="fl">144.9713</span>, <span class="fl">144.9715</span>, <span class="fl">144.9719</span>, <span class="fl">144.9728</span>, <span class="fl">144.9732</span>, <span class="fl">144.973</span>, <span class="fl">144.9727</span>, <span class="fl">144.9731</span>, <span class="fl">144.9749</span>, <span class="fl">144.9742</span>),</span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="dt">lat =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">37.8075</span>, <span class="fl">-37.8076</span>, <span class="fl">-37.8076</span>, <span class="fl">-37.8078</span>, <span class="fl">-37.8079</span>, <span class="fl">-37.8079</span>, <span class="fl">-37.8091</span>, <span class="fl">-37.8107</span>, <span class="fl">-37.8115</span>, <span class="fl">-37.8153</span>, <span class="fl">-37.8155</span>)</span>
-<span id="cb3-4"><a href="#cb3-4"></a>  )</span>
-<span id="cb3-5"><a href="#cb3-5"></a></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="kw">encode</span>(df)</span></code></pre></div>
+<p>The <code>encode()</code> function will attempt to find the lon &amp;
+lat columns inside a data.frame using regex matching. However, you can
+also specify the columns of coordinates:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">lon =</span> <span class="fu">c</span>(<span class="fl">144.9709</span>, <span class="fl">144.9713</span>, <span class="fl">144.9715</span>, <span class="fl">144.9719</span>, <span class="fl">144.9728</span>, <span class="fl">144.9732</span>, <span class="fl">144.973</span>, <span class="fl">144.9727</span>, <span class="fl">144.9731</span>, <span class="fl">144.9749</span>, <span class="fl">144.9742</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">lat =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">37.8075</span>, <span class="sc">-</span><span class="fl">37.8076</span>, <span class="sc">-</span><span class="fl">37.8076</span>, <span class="sc">-</span><span class="fl">37.8078</span>, <span class="sc">-</span><span class="fl">37.8079</span>, <span class="sc">-</span><span class="fl">37.8079</span>, <span class="sc">-</span><span class="fl">37.8091</span>, <span class="sc">-</span><span class="fl">37.8107</span>, <span class="sc">-</span><span class="fl">37.8115</span>, <span class="sc">-</span><span class="fl">37.8153</span>, <span class="sc">-</span><span class="fl">37.8155</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">encode</span>(df)</span></code></pre></div>
 <pre><code>## [1] &quot;xgweFcsysZToA?g@f@oAPsD?oApFf@|Hz@`DmAvViJf@jC&quot;</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">## or specify the columns to use</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># encode(df, lon = &quot;lon&quot;, lat = &quot;lat&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## or specify the columns to use</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># encode(df, lon = &quot;lon&quot;, lat = &quot;lat&quot;)</span></span></code></pre></div>
 </div>
 <div id="sf" class="section level3">
 <h3>sf</h3>
-<p><code>encode()</code> will currently work on <code>sf</code> objects with geometry types</p>
+<p><code>encode()</code> will currently work on <code>sf</code> objects
+with geometry types</p>
 <ul>
 <li>POINT</li>
 <li>MULTIPOINT</li>
@@ -428,22 +408,24 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <li>MULTIPOLYGON</li>
 </ul>
 <p>It will not work on GEOMETRYCOLLECTION objects.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">library</span>(sf)</span></code></pre></div>
-<pre><code>## Linking to GEOS 3.8.1, GDAL 3.1.4, PROJ 6.3.1</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">## data set of North Carolina states</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>nc &lt;-<span class="st"> </span>sf<span class="op">::</span><span class="kw">st_read</span>(<span class="kw">system.file</span>(<span class="st">&quot;shape/nc.shp&quot;</span>, <span class="dt">package=</span><span class="st">&quot;sf&quot;</span>))</span></code></pre></div>
-<pre><code>## Reading layer `nc&#39; from data source `/Library/Frameworks/R.framework/Versions/4.0/Resources/library/sf/shape/nc.shp&#39; using driver `ESRI Shapefile&#39;
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div>
+<pre><code>## Linking to GEOS 3.9.1, GDAL 3.2.3, PROJ 7.2.1</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">## data set of North Carolina states</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>nc <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(<span class="fu">system.file</span>(<span class="st">&quot;shape/nc.shp&quot;</span>, <span class="at">package=</span><span class="st">&quot;sf&quot;</span>))</span></code></pre></div>
+<pre><code>## Reading layer `nc&#39; from data source 
+##   `/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/sf/shape/nc.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
 ## Simple feature collection with 100 features and 14 fields
-## geometry type:  MULTIPOLYGON
-## dimension:      XY
-## bbox:           xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965
-## geographic CRS: NAD27</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>nc[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,]</span></code></pre></div>
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965
+## Geodetic CRS:  NAD27</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>nc[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span></code></pre></div>
 <pre><code>## Simple feature collection with 5 features and 14 fields
-## geometry type:  MULTIPOLYGON
-## dimension:      XY
-## bbox:           xmin: -81.74107 ymin: 36.07282 xmax: -75.77316 ymax: 36.58965
-## geographic CRS: NAD27
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -81.74107 ymin: 36.07282 xmax: -75.77316 ymax: 36.58965
+## Geodetic CRS:  NAD27
 ##    AREA PERIMETER CNTY_ CNTY_ID        NAME  FIPS FIPSNO CRESS_ID BIR74 SID74
 ## 1 0.114     1.442  1825    1825        Ashe 37009  37009        5  1091     1
 ## 2 0.061     1.231  1827    1827   Alleghany 37005  37005        3   487     0
@@ -456,9 +438,11 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ## 3     208  3616     6     260 MULTIPOLYGON (((-80.45634 3...
 ## 4     123   830     2     145 MULTIPOLYGON (((-76.00897 3...
 ## 5    1066  1606     3    1197 MULTIPOLYGON (((-77.21767 3...</code></pre>
-<p>When used on an <code>sf</code> object, an <code>sfencoded</code> object is returned, with the encoded polylines replacing the <code>sf::st_geometry</code> column.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>enc &lt;-<span class="st"> </span><span class="kw">encode</span>(nc)</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">str</span>(enc)</span></code></pre></div>
+<p>When used on an <code>sf</code> object, an <code>sfencoded</code>
+object is returned, with the encoded polylines replacing the
+<code>sf::st_geometry</code> column.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>enc <span class="ot">&lt;-</span> <span class="fu">encode</span>(nc)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(enc)</span></code></pre></div>
 <pre><code>## Classes &#39;sfencoded&#39; and &#39;data.frame&#39;:    100 obs. of  15 variables:
 ##  $ AREA     : num  0.114 0.061 0.143 0.07 0.153 0.097 0.062 0.091 0.118 0.124 ...
 ##  $ PERIMETER: num  1.44 1.23 1.63 2.97 2.21 ...
@@ -487,9 +471,9 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ##   ..$ proj: chr &quot;+proj=longlat +datum=NAD27 +no_defs&quot;
 ##   ..$ prec: num 0
 ##   ..$ n_em: int 0</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">attr</span>(enc, <span class="st">&quot;encoded_column&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(enc, <span class="st">&quot;encoded_column&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;geometry&quot;</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>enc[<span class="dv">1</span>, <span class="kw">attr</span>(enc, <span class="st">&quot;encoded_column&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>enc[<span class="dv">1</span>, <span class="fu">attr</span>(enc, <span class="st">&quot;encoded_column&quot;</span>)]</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;u_d|EtsgpNmmFphLyEbcCibLf{Lk~H`bT}rNmjGihHd[kvL_lEzgBkl~@lyE`MnvCimCbmEqfAxnGieH~gEeTd_DmiCxvA_D|oAdwCidAtsKr_AjiEdwA~YztFggAjbCfrAwf@hrF~mBdd@bh@zsB`cCpgCt_@d{B&quot;
 ## attr(,&quot;sfc&quot;)
@@ -497,9 +481,11 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;list&quot;</code></pre>
-<p>As you can see, the geometry attributes are kept on the encoded object. However, you can remove them by specifying <code>strip = TRUE</code></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>encLite &lt;-<span class="st"> </span><span class="kw">encode</span>(nc, <span class="dt">strip =</span> T)</span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">str</span>(encLite)</span></code></pre></div>
+<p>As you can see, the geometry attributes are kept on the encoded
+object. However, you can remove them by specifying
+<code>strip = TRUE</code></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>encLite <span class="ot">&lt;-</span> <span class="fu">encode</span>(nc, <span class="at">strip =</span> T)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(encLite)</span></code></pre></div>
 <pre><code>## Classes &#39;sfencodedLite&#39; and &#39;data.frame&#39;:    100 obs. of  15 variables:
 ##  $ AREA     : num  0.114 0.061 0.143 0.07 0.153 0.097 0.062 0.091 0.118 0.124 ...
 ##  $ PERIMETER: num  1.44 1.23 1.63 2.97 2.21 ...
@@ -518,61 +504,68 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ##  $ geometry :encoded_column of length 100; first element: List of 1
 ##   ..$ : chr &quot;u_d|EtsgpNmmFphLyEbcCibLf{Lk~H`bT}rNmjGihHd[kvL_lEzgBkl~@lyE`MnvCimCbmEqfAxnGieH~gEeTd_DmiCxvA_D|oAdwCidAtsKr_A&quot;| __truncated__
 ##  - attr(*, &quot;encoded_column&quot;)= chr &quot;geometry&quot;</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>encLite[<span class="dv">1</span>, <span class="kw">attr</span>(encLite, <span class="st">&quot;encoded_column&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>encLite[<span class="dv">1</span>, <span class="fu">attr</span>(encLite, <span class="st">&quot;encoded_column&quot;</span>)]</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;u_d|EtsgpNmmFphLyEbcCibLf{Lk~H`bT}rNmjGihHd[kvL_lEzgBkl~@lyE`MnvCimCbmEqfAxnGieH~gEeTd_DmiCxvA_D|oAdwCidAtsKr_AjiEdwA~YztFggAjbCfrAwf@hrF~mBdd@bh@zsB`cCpgCt_@d{B&quot;
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;list&quot;</code></pre>
-<p>The benefit of stripping the attributes is to reduce the size of the object, which can be useful for web plotting if bandwidth/data transfer speeds are an issue.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">vapply</span>(<span class="kw">mget</span>(<span class="kw">c</span>(<span class="st">&#39;nc&#39;</span>, <span class="st">&#39;enc&#39;</span>, <span class="st">&#39;encLite&#39;</span>) ), <span class="cf">function</span>(x) { <span class="kw">format</span>(<span class="kw">object.size</span>(x), <span class="dt">units =</span> <span class="st">&quot;Kb&quot;</span>) }, <span class="st">&#39;&#39;</span>)</span></code></pre></div>
+<p>The benefit of stripping the attributes is to reduce the size of the
+object, which can be useful for web plotting if bandwidth/data transfer
+speeds are an issue.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vapply</span>(<span class="fu">mget</span>(<span class="fu">c</span>(<span class="st">&#39;nc&#39;</span>, <span class="st">&#39;enc&#39;</span>, <span class="st">&#39;encLite&#39;</span>) ), <span class="cf">function</span>(x) { <span class="fu">format</span>(<span class="fu">object.size</span>(x), <span class="at">units =</span> <span class="st">&quot;Kb&quot;</span>) }, <span class="st">&#39;&#39;</span>)</span></code></pre></div>
 <pre><code>##         nc        enc    encLite 
 ## &quot;139.8 Kb&quot;  &quot;90.6 Kb&quot;  &quot;52.6 Kb&quot;</code></pre>
 </div>
 </div>
 <div id="well-known-text" class="section level2">
 <h2>Well-known Text</h2>
-<p>The two functions <code>polyline_wkt</code> and <code>wkt_polylne</code> can be used to convert <code>sfencoded</code> objects to and from well-known text.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>wkt &lt;-<span class="st"> </span><span class="kw">polyline_wkt</span>(enc)</span>
-<span id="cb24-2"><a href="#cb24-2"></a>wkt[<span class="dv">1</span>, ]</span></code></pre></div>
+<p>The two functions <code>polyline_wkt</code> and
+<code>wkt_polylne</code> can be used to convert <code>sfencoded</code>
+objects to and from well-known text.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>wkt <span class="ot">&lt;-</span> <span class="fu">polyline_wkt</span>(enc)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>wkt[<span class="dv">1</span>, ]</span></code></pre></div>
 <pre><code>##    AREA PERIMETER CNTY_ CNTY_ID NAME  FIPS FIPSNO CRESS_ID BIR74 SID74 NWBIR74
 ## 1 0.114     1.442  1825    1825 Ashe 37009  37009        5  1091     1      10
 ##   BIR79 SID79 NWBIR79                          geometry
 ## 1  1364     0      19 MULTIPOLYGON (((-81.472748 36....</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>enc2 &lt;-<span class="st"> </span><span class="kw">wkt_polyline</span>(wkt)</span>
-<span id="cb26-2"><a href="#cb26-2"></a>enc2[<span class="dv">1</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>enc2 <span class="ot">&lt;-</span> <span class="fu">wkt_polyline</span>(wkt)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>enc2[<span class="dv">1</span>, ]</span></code></pre></div>
 <pre><code>##    AREA PERIMETER CNTY_ CNTY_ID NAME  FIPS FIPSNO CRESS_ID BIR74 SID74 NWBIR74
 ## 1 0.114     1.442  1825    1825 Ashe 37009  37009        5  1091     1      10
 ##   BIR79 SID79 NWBIR79                              geometry
 ## 1  1364     0      19 MULTIPOLYGON: erenEdma_NcvDgbCmhEw...</code></pre>
-<p>I’ve provided these functions to enable the conversion of encoded polylines into other geometry formats, should they be required by other packages.</p>
+<p>I’ve provided these functions to enable the conversion of encoded
+polylines into other geometry formats, should they be required by other
+packages.</p>
 <div id="converting-to-sf" class="section level3">
 <h3>Converting to sf</h3>
-<p><code>sf</code> can read well-known text, so you can convert the wkt object back to <code>sf</code> / <code>sfc</code> objects</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># sfc from wkt</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="kw">st_as_sfc</span>(wkt<span class="op">$</span>geometry)</span></code></pre></div>
+<p><code>sf</code> can read well-known text, so you can convert the wkt
+object back to <code>sf</code> / <code>sfc</code> objects</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sfc from wkt</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">st_as_sfc</span>(wkt<span class="sc">$</span>geometry)</span></code></pre></div>
 <pre><code>## Geometry set for 100 features 
-## geometry type:  MULTIPOLYGON
-## dimension:      XY
-## bbox:           xmin: -84.32384 ymin: 33.88199 xmax: -75.45697 ymax: 36.58964
-## CRS:            NA
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -84.32384 ymin: 33.88199 xmax: -75.45697 ymax: 36.58964
+## CRS:           NA
 ## First 5 geometries:</code></pre>
 <pre><code>## MULTIPOLYGON (((-81.47275 36.23435, -81.54084 3...</code></pre>
 <pre><code>## MULTIPOLYGON (((-81.23989 36.36536, -81.24068 3...</code></pre>
 <pre><code>## MULTIPOLYGON (((-80.45634 36.24255, -80.47638 3...</code></pre>
 <pre><code>## MULTIPOLYGON (((-76.00897 36.31959, -76.01734 3...</code></pre>
 <pre><code>## MULTIPOLYGON (((-77.21766 36.24098, -77.23461 3...</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co">## back to sf - use `as.data.frame` to remove sfencoded attributes</span></span>
-<span id="cb35-2"><a href="#cb35-2"></a>sf_wkt &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(wkt)</span>
-<span id="cb35-3"><a href="#cb35-3"></a>sf_wkt<span class="op">$</span>geometry &lt;-<span class="st"> </span><span class="kw">st_as_sfc</span>(sf_wkt<span class="op">$</span>geometry)</span>
-<span id="cb35-4"><a href="#cb35-4"></a>sf_wkt &lt;-<span class="st"> </span><span class="kw">st_sf</span>(sf_wkt)</span>
-<span id="cb35-5"><a href="#cb35-5"></a>  </span>
-<span id="cb35-6"><a href="#cb35-6"></a><span class="kw">head</span>(sf_wkt[, <span class="kw">c</span>(<span class="st">&quot;AREA&quot;</span>, <span class="st">&quot;PERIMETER&quot;</span>, <span class="st">&quot;geometry&quot;</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="do">## back to sf - use `as.data.frame` to remove sfencoded attributes</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>sf_wkt <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(wkt)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>sf_wkt<span class="sc">$</span>geometry <span class="ot">&lt;-</span> <span class="fu">st_as_sfc</span>(sf_wkt<span class="sc">$</span>geometry)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>sf_wkt <span class="ot">&lt;-</span> <span class="fu">st_sf</span>(sf_wkt)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sf_wkt[, <span class="fu">c</span>(<span class="st">&quot;AREA&quot;</span>, <span class="st">&quot;PERIMETER&quot;</span>, <span class="st">&quot;geometry&quot;</span>)])</span></code></pre></div>
 <pre><code>## Simple feature collection with 6 features and 2 fields
-## geometry type:  MULTIPOLYGON
-## dimension:      XY
-## bbox:           xmin: -81.74107 ymin: 36.07281 xmax: -75.77315 ymax: 36.58964
-## CRS:            NA
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -81.74107 ymin: 36.07281 xmax: -75.77315 ymax: 36.58964
+## CRS:           NA
 ##    AREA PERIMETER                       geometry
 ## 1 0.114     1.442 MULTIPOLYGON (((-81.47275 3...
 ## 2 0.061     1.231 MULTIPOLYGON (((-81.23989 3...
@@ -584,13 +577,14 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 </div>
 <div id="decoding" class="section level2">
 <h2>Decoding</h2>
-<p>Use <code>decode()</code> to decode polylines into coordinates. This function will return a list of data.frames with lon/lat column.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>polylines &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
-<span id="cb37-2"><a href="#cb37-2"></a> <span class="st">&quot;ohlbDnbmhN~suq@am{tAw`qsAeyhGvkz`@fge}A&quot;</span>,</span>
-<span id="cb37-3"><a href="#cb37-3"></a> <span class="st">&quot;ggmnDt}wmLgc`DesuQvvrLofdDorqGtzzV&quot;</span></span>
-<span id="cb37-4"><a href="#cb37-4"></a>)</span>
-<span id="cb37-5"><a href="#cb37-5"></a></span>
-<span id="cb37-6"><a href="#cb37-6"></a><span class="kw">decode</span>(polylines)</span></code></pre></div>
+<p>Use <code>decode()</code> to decode polylines into coordinates. This
+function will return a list of data.frames with lon/lat column.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>polylines <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;ohlbDnbmhN~suq@am{tAw`qsAeyhGvkz`@fge}A&quot;</span>,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;ggmnDt}wmLgc`DesuQvvrLofdDorqGtzzV&quot;</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="fu">decode</span>(polylines)</span></code></pre></div>
 <pre><code>## [[1]]
 ##      lat       lon
 ## 1 26.774 -80.18999
@@ -607,10 +601,14 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 </div>
 <div id="benchmarking" class="section level2">
 <h2>Benchmarking</h2>
-<p>You will note that the encoded strings are different between the two <code>enc</code> objects created earlier. For example</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>enc[<span class="dv">1</span>, <span class="st">&#39;geometry&#39;</span>][[<span class="dv">1</span>]] <span class="op">==</span><span class="st"> </span>enc2[<span class="dv">1</span>, <span class="st">&#39;geometry&#39;</span>][[<span class="dv">1</span>]]</span></code></pre></div>
+<p>You will note that the encoded strings are different between the two
+<code>enc</code> objects created earlier. For example</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>enc[<span class="dv">1</span>, <span class="st">&#39;geometry&#39;</span>][[<span class="dv">1</span>]] <span class="sc">==</span> enc2[<span class="dv">1</span>, <span class="st">&#39;geometry&#39;</span>][[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## [1] FALSE FALSE</code></pre>
-<p>This results from the <strong>lossy</strong>-ness of the encoding. However, the general shape of the information is preserved. These two maps are plots of the <code>enc</code> and <code>enc2</code> objects respectively:</p>
+<p>This results from the <strong>lossy</strong>-ness of the encoding.
+However, the general shape of the information is preserved. These two
+maps are plots of the <code>enc</code> and <code>enc2</code> objects
+respectively:</p>
 <pre><code>library(googleway)
 
 ## You&#39;ll need a Google Map API key to run this code
@@ -631,7 +629,9 @@ google_map(key = mapKey) %&gt;%
 </div>
 <div id="plotting" class="section level3">
 <h3>Plotting</h3>
-<p>This benchmark compares plotting an <code>sf</code> object through <strong>leaflet</strong> vs plotting the encoded object through <strong>googleway</strong></p>
+<p>This benchmark compares plotting an <code>sf</code> object through
+<strong>leaflet</strong> vs plotting the encoded object through
+<strong>googleway</strong></p>
 <pre><code>
 library(microbenchmark)
 library(leaflet)
@@ -656,7 +656,8 @@ Unit: milliseconds
  goog  5.457699  5.972203  6.379053  6.162676  6.467225   8.876789   100
  leaf 29.915151 32.093100 34.251388 33.088324 34.629769 106.124047   100
  </code></pre>
-<p>These benchmarks don’t account for the time taken for the browswer to render the maps</p>
+<p>These benchmarks don’t account for the time taken for the browswer to
+render the maps</p>
 </div>
 </div>
 
