@@ -18,7 +18,7 @@ namespace boost { namespace multiprecision { namespace backends { namespace deta
 
 //
 // Simple routines for performing checked arithmetic with a builtin arithmetic type.
-// Note that this is not a complete header, it must be included as part of b/multiprecision/cpp_int.hpp.
+// Note that this is not a complete header, it must be included as part of boost/multiprecision/cpp_int.hpp.
 //
 
 template <typename T>

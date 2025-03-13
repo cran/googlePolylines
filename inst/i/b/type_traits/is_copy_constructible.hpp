@@ -110,7 +110,7 @@ namespace boost {
          // If you see errors like this:
          //
          //      `'T::T(const T&)' is private`
-         //      `b/type_traits/is_copy_constructible.hpp:68:5: error: within this context`
+         //      `boost/type_traits/is_copy_constructible.hpp:68:5: error: within this context`
          //
          // then you are trying to call that macro for a structure defined like that:
          //

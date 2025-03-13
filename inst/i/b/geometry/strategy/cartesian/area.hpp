@@ -97,7 +97,7 @@ public :
 
         // Below formulas are equivalent, however the two lower ones
         // suffer less from accuracy loss for great values of coordinates.
-        // See: https://svn.boost.org/trac/b/ticket/11928
+        // See: https://svn.boost.org/trac/boost/ticket/11928
 
         // SUM += x2 * y1 - x1 * y2;
         // state.sum += detail::determinant<return_type>(p2, p1);

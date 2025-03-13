@@ -83,8 +83,8 @@
 // We disable this if the compiler is really nvcc with C++03 as it
 // doesn't actually support __int128 as of CUDA_VERSION=7500
 // even though it defines __SIZEOF_INT128__.
-// See https://svn.boost.org/trac/b/ticket/10418
-//     https://svn.boost.org/trac/b/ticket/11852
+// See https://svn.boost.org/trac/boost/ticket/10418
+//     https://svn.boost.org/trac/boost/ticket/11852
 // Only re-enable this for nvcc if you're absolutely sure
 // of the circumstances under which it's supported.
 // Similarly __SIZEOF_INT128__ is defined when targetting msvc
@@ -319,6 +319,10 @@
 #if !__has_cpp_attribute(fallthrough) || __cplusplus < 201406L
 #  define BOOST_NO_CXX17_INLINE_VARIABLES
 #  define BOOST_NO_CXX17_FOLD_EXPRESSIONS
+#endif
+
+#if (__clang_major__ < 4) || (__cplusplus < 201406L) /* non-standard value that is greater than 201402, which is reported by clang 4.0.0 for C++1z */
+#  define BOOST_NO_CXX17_AUTO_NONTYPE_TEMPLATE_PARAMS
 #endif
 
 #if __cplusplus < 201103L

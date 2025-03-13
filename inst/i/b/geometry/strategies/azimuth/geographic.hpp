@@ -11,7 +11,7 @@
 #define BOOST_GEOMETRY_STRATEGIES_AZIMUTH_GEOGRAPHIC_HPP
 
 
-// TODO: move this file to b/geometry/strategy
+// TODO: move this file to boost/geometry/strategy
 #include <b/geometry/strategies/geographic/azimuth.hpp>
 
 #include <b/geometry/strategies/azimuth/services.hpp>

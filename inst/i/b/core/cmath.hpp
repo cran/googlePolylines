@@ -7,7 +7,7 @@
 # pragma once
 #endif
 
-// b/core/cmath.hpp
+// boost/core/cmath.hpp
 //
 // Floating point classification and sign manipulation functions
 // Extracted from https://github.com/boostorg/lexical_cast/pull/37

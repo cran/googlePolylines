@@ -29,7 +29,6 @@
 
 #include <b/geometry/core/static_assert.hpp>
 #include <b/geometry/core/tag.hpp>
-#include <b/geometry/core/tag_cast.hpp>
 #include <b/geometry/core/tags.hpp>
 
 #include <b/geometry/util/type_traits.hpp>

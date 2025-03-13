@@ -7,7 +7,7 @@
 # pragma once
 #endif
 
-// b/core/detail/sp_win32_sleep.hpp
+// boost/core/detail/sp_win32_sleep.hpp
 //
 // Declares the Win32 Sleep() function.
 //

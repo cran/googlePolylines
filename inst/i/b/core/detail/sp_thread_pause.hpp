@@ -7,7 +7,7 @@
 # pragma once
 #endif
 
-// b/core/detail/sp_thread_pause.hpp
+// boost/core/detail/sp_thread_pause.hpp
 //
 // inline void bost::core::sp_thread_pause();
 //

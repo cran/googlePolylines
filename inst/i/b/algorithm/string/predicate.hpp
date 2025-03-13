@@ -24,7 +24,7 @@
 #include <b/algorithm/string/find.hpp>
 #include <b/algorithm/string/detail/predicate.hpp>
 
-/*! \file b/algorithm/string/predicate.hpp
+/*! \file boost/algorithm/string/predicate.hpp
     Defines string-related predicates. 
     The predicates determine whether a substring is contained in the input string 
     under various conditions: a string starts with the substring, ends with the 

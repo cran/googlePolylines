@@ -16,11 +16,6 @@
 #include <cstddef>
 #include <utility>
 
-#include <b/numeric/conversion/cast.hpp>
-
-#include <b/geometry/util/math.hpp>
-#include <b/geometry/util/calculation_type.hpp>
-
 #include <b/geometry/core/access.hpp>
 #include <b/geometry/core/tags.hpp>
 #include <b/geometry/core/coordinate_dimension.hpp>
@@ -35,6 +30,9 @@
 #include <b/geometry/strategies/normalize.hpp>
 #include <b/geometry/strategies/spherical/azimuth.hpp>
 #include <b/geometry/strategies/spherical/disjoint_box_box.hpp>
+
+#include <b/geometry/util/math.hpp>
+#include <b/geometry/util/calculation_type.hpp>
 
 
 namespace boost { namespace geometry { namespace strategy { namespace disjoint
@@ -56,9 +54,7 @@ struct segment_box_spherical
     template <typename Segment, typename Box>
     static inline bool apply(Segment const& segment, Box const& box)
     {
-        typedef typename point_type<Segment>::type segment_point_type;
-        typedef typename coordinate_type<segment_point_type>::type CT;
-        geometry::strategy::azimuth::spherical<CT> azimuth_strategy;
+        geometry::strategy::azimuth::spherical<coordinate_type_t<point_type_t<Segment>>> azimuth_strategy;
 
         return geometry::detail::disjoint::disjoint_segment_box_sphere_or_spheroid
                 <

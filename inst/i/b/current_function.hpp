@@ -8,7 +8,7 @@
 #endif
 
 //
-//  b/current_function.hpp - BOOST_CURRENT_FUNCTION
+//  boost/current_function.hpp - BOOST_CURRENT_FUNCTION
 //
 //  Copyright 2002-2018 Peter Dimov
 //

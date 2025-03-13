@@ -21,6 +21,8 @@
 
 #include <b/geometry/core/static_assert.hpp>
 
+#include <b/geometry/algorithms/expand.hpp>
+
 #include <b/geometry/index/detail/varray.hpp>
 
 #include <b/geometry/index/detail/rtree/node/concept.hpp>
@@ -36,13 +38,13 @@
 #include <b/geometry/index/detail/rtree/node/variant_dynamic.hpp>
 #include <b/geometry/index/detail/rtree/node/variant_static.hpp>
 
-#include <b/geometry/algorithms/expand.hpp>
-
 #include <b/geometry/index/detail/rtree/visitors/destroy.hpp>
 #include <b/geometry/index/detail/rtree/visitors/is_leaf.hpp>
 
 #include <b/geometry/index/detail/algorithms/bounds.hpp>
 #include <b/geometry/index/detail/is_bounding_geometry.hpp>
+
+#include <b/geometry/util/constexpr.hpp>
 
 namespace boost { namespace geometry { namespace index {
 
@@ -92,11 +94,10 @@ inline Box values_box(FwdIter first, FwdIter last, Translator const& tr,
     Box result = elements_box<Box>(first, last, tr, strategy);
 
 #ifdef BOOST_GEOMETRY_INDEX_EXPERIMENTAL_ENLARGE_BY_EPSILON
-    if (BOOST_GEOMETRY_CONDITION((
-        ! is_bounding_geometry
-            <
-                typename indexable_type<Translator>::type
-            >::value)))
+    if BOOST_GEOMETRY_CONSTEXPR (! index::detail::is_bounding_geometry
+                                    <
+                                        typename indexable_type<Translator>::type
+                                    >::value)
     {
         geometry::detail::expand_by_epsilon(result);
     }

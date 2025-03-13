@@ -20,7 +20,7 @@
 //  03 Apr 08 Make sure "convertible to bool" is sufficient
 //            for T::operator<, etc. (Daniel Frey)
 //  24 May 07 Changed empty_base to depend on T, see
-//            http://svn.boost.org/trac/b/ticket/979
+//            http://svn.boost.org/trac/boost/ticket/979
 //  21 Oct 02 Modified implementation of operators to allow compilers with a
 //            correct named return value optimization (NRVO) to produce optimal
 //            code.  (Daniel Frey)

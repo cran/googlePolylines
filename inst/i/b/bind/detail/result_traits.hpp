@@ -10,7 +10,7 @@
 //
 //  bind/detail/result_traits.hpp
 //
-//  b/bind.hpp support header, return type deduction
+//  boost/bind.hpp support header, return type deduction
 //
 //  Copyright 2006, 2020 Peter Dimov
 //

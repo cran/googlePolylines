@@ -53,7 +53,7 @@
 #include <b/geometry/strategies/convex_hull/spherical.hpp>
 #include <b/geometry/strategies/default_strategy.hpp>
 
-#include <b/geometry/util/condition.hpp>
+#include <b/geometry/util/constexpr.hpp>
 #include <b/geometry/util/range.hpp>
 #include <b/geometry/util/sequence.hpp>
 #include <b/geometry/util/type_traits.hpp>
@@ -213,7 +213,7 @@ struct convex_hull
         detail::convex_hull::input_geometry_proxy<Geometry> in_proxy(geometry);
         detail::convex_hull::graham_andrew
             <
-                typename point_type<Geometry>::type
+                point_type_t<Geometry>
             >::apply(in_proxy, out, strategy);
     }
 };
@@ -234,13 +234,13 @@ struct convex_hull<Box, box_tag>
         static bool const Reverse
             = geometry::point_order<OutputGeometry>::value == counterclockwise;
 
-        std::array<typename point_type<OutputGeometry>::type, 4> arr;
+        std::array<point_type_t<OutputGeometry>, 4> arr;
         // TODO: This assigns only 2d cooridnates!
         //       And it is also used in box_view<>!
         geometry::detail::assign_box_corners_oriented<Reverse>(box, arr);
 
         std::move(arr.begin(), arr.end(), range::back_inserter(out));
-        if (BOOST_GEOMETRY_CONDITION(Close))
+        if BOOST_GEOMETRY_CONSTEXPR (Close)
         {
             range::push_back(out, range::front(out));
         }

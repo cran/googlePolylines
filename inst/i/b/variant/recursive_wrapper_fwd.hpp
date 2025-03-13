@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 //
 // Copyright (c) 2002 Eric Friedman, Itay Maman
-// Copyright (c) 2016-2023 Antony Polukhin
+// Copyright (c) 2016-2024 Antony Polukhin
 //
 // Portions Copyright (C) 2002 David Abrahams
 //
@@ -67,7 +67,7 @@ template <class T, class U> struct is_constructible<recursive_wrapper<T>, recurs
 template <class T, class U> struct is_constructible<recursive_wrapper<T>, const recursive_wrapper<U>& > : boost::false_type{};
 
 // recursive_wrapper is not nothrow move constructible, because it's constructor does dynamic memory allocation.
-// This specialisation is required to workaround GCC6 issue: https://svn.boost.org/trac/b/ticket/12680
+// This specialisation is required to workaround GCC6 issue: https://svn.boost.org/trac/boost/ticket/12680
 template <class T> struct is_nothrow_move_constructible<recursive_wrapper<T> > : boost::false_type{};
 
 ///////////////////////////////////////////////////////////////////////////////

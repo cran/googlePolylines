@@ -7,7 +7,7 @@
 # pragma once
 #endif
 
-//  b/throw_exception.hpp
+//  boost/throw_exception.hpp
 //
 //  Copyright (c) 2002, 2018-2022 Peter Dimov
 //  Copyright (c) 2008-2009 Emil Dotchevski and Reverge Studios, Inc.

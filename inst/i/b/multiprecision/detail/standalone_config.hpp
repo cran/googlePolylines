@@ -21,7 +21,7 @@
 #    error "Boost.Config is considered a requirement to use Boost.Multiprecision in standalone mode. A package is provided at https://github.com/boostorg/multiprecision/releases"
 #  endif
 #else
-// Provides the less helpful fatal error: 'b/config.hpp' file not found if not available
+// Provides the less helpful fatal error: 'boost/config.hpp' file not found if not available
 #  include <b/config.hpp>
 #  include <b/config/workaround.hpp>
 #endif

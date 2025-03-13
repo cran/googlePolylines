@@ -18,10 +18,10 @@
 
 #include <cstddef>
 
-#include <b/numeric/conversion/cast.hpp>
 #include <b/geometry/core/access.hpp>
 #include <b/geometry/core/coordinate_dimension.hpp>
 #include <b/geometry/core/coordinate_type.hpp>
+#include <b/geometry/util/numeric_cast.hpp>
 
 
 namespace boost { namespace geometry
@@ -45,7 +45,7 @@ struct point_to_point
     {
         typedef typename coordinate_type<Destination>::type coordinate_type;
 
-        set<Dimension>(destination, boost::numeric_cast<coordinate_type>(get<Dimension>(source)));
+        set<Dimension>(destination, util::numeric_cast<coordinate_type>(get<Dimension>(source)));
         point_to_point<Source, Destination, Dimension + 1, DimensionCount>::apply(source, destination);
     }
 };

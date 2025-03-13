@@ -10,7 +10,7 @@
 #define BOOST_UTILITY_ENABLE_IF_HPP
 
 // The header file at this path is deprecated;
-// use b/core/enable_if.hpp instead.
+// use boost/core/enable_if.hpp instead.
 
 #include <b/core/enable_if.hpp>
 

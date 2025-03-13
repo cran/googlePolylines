@@ -37,7 +37,7 @@
 //
 // For the following code we get several warnings along the lines of:
 //
-// b/cstdint.hpp:428:35: error: use of C99 long long integer constant
+// boost/cstdint.hpp:428:35: error: use of C99 long long integer constant
 //
 // So we declare this a system header to suppress these warnings.
 // See also https://github.com/boostorg/config/issues/190
@@ -50,7 +50,7 @@
 // Note that GLIBC is a bit inconsistent about whether int64_t is defined or not
 // depending upon what headers happen to have been included first...
 // so we disable use of stdint.h when GLIBC does not define __GLIBC_HAVE_LONG_LONG.
-// See https://svn.boost.org/trac/b/ticket/3548 and http://sources.redhat.com/bugzilla/show_bug.cgi?id=10990
+// See https://svn.boost.org/trac/boost/ticket/3548 and http://sources.redhat.com/bugzilla/show_bug.cgi?id=10990
 //
 #if defined(BOOST_HAS_STDINT_H)            \
   && (!defined(__GLIBC__)                  \
@@ -226,7 +226,7 @@ namespace boost
      typedef unsigned char   uint_least8_t;
      typedef unsigned char   uint_fast8_t;
 # else
-#    error defaults not correct; you must hand modify b/cstdint.hpp
+#    error defaults not correct; you must hand modify boost/cstdint.hpp
 # endif
 
 //  16-bit types  -----------------------------------------------------------//
@@ -265,7 +265,7 @@ namespace boost
      typedef unsigned short  uint_least16_t;
      typedef unsigned short  uint_fast16_t;
 # else
-#    error defaults not correct; you must hand modify b/cstdint.hpp
+#    error defaults not correct; you must hand modify boost/cstdint.hpp
 # endif
 
 //  32-bit types  -----------------------------------------------------------//
@@ -300,7 +300,7 @@ namespace boost
       typedef unsigned __int32  uint_least32_t;
       typedef unsigned __int32  uint_fast32_t;
 # else
-#    error defaults not correct; you must hand modify b/cstdint.hpp
+#    error defaults not correct; you must hand modify boost/cstdint.hpp
 # endif
 
 //  64-bit types + intmax_t and uintmax_t  ----------------------------------//
@@ -314,7 +314,7 @@ namespace boost
 #    elif (defined(ULLONG_MAX) && ULLONG_MAX == 18446744073709551615ULL) || (defined(ULONG_LONG_MAX) && ULONG_LONG_MAX == 18446744073709551615ULL) || (defined(ULONGLONG_MAX) && ULONGLONG_MAX == 18446744073709551615ULL)
                                                                  // 2**64 - 1
 #    else
-#       error defaults not correct; you must hand modify b/cstdint.hpp
+#       error defaults not correct; you must hand modify boost/cstdint.hpp
 #    endif
 
      typedef  ::boost::long_long_type            intmax_t;
@@ -338,7 +338,7 @@ namespace boost
      typedef unsigned long        uint_least64_t;
      typedef unsigned long        uint_fast64_t;
 #    else
-#       error defaults not correct; you must hand modify b/cstdint.hpp
+#       error defaults not correct; you must hand modify boost/cstdint.hpp
 #    endif
 # elif defined(__GNUC__) && defined(BOOST_HAS_LONG_LONG)
      __extension__ typedef long long            intmax_t;
@@ -420,7 +420,7 @@ INT#_C macros if they're not already defined (John Maddock).
    (!defined(INT8_C) || !defined(INT16_C) || !defined(INT32_C) || !defined(INT64_C))
 //
 // Undef the macros as a precaution, since we may get here if <stdint.h> has failed
-// to define them all, see https://svn.boost.org/trac/b/ticket/12786
+// to define them all, see https://svn.boost.org/trac/boost/ticket/12786
 //
 #undef INT8_C
 #undef INT16_C
@@ -517,7 +517,7 @@ INT#_C macros if they're not already defined (John Maddock).
 #       define INT64_C(value) value##LL
 #       define UINT64_C(value) value##uLL
 #    else
-#       error defaults not correct; you must hand modify b/cstdint.hpp
+#       error defaults not correct; you must hand modify boost/cstdint.hpp
 #    endif
 #  elif ULONG_MAX != 0xffffffff
 
@@ -525,7 +525,7 @@ INT#_C macros if they're not already defined (John Maddock).
 #       define INT64_C(value) value##L
 #       define UINT64_C(value) value##uL
 #    else
-#       error defaults not correct; you must hand modify b/cstdint.hpp
+#       error defaults not correct; you must hand modify boost/cstdint.hpp
 #    endif
 #  elif defined(BOOST_HAS_LONG_LONG)
      // Usual macros not defined, work things out for ourselves:
@@ -533,10 +533,10 @@ INT#_C macros if they're not already defined (John Maddock).
 #       define INT64_C(value) value##LL
 #       define UINT64_C(value) value##uLL
 #    else
-#       error defaults not correct; you must hand modify b/cstdint.hpp
+#       error defaults not correct; you must hand modify boost/cstdint.hpp
 #    endif
 #  else
-#    error defaults not correct; you must hand modify b/cstdint.hpp
+#    error defaults not correct; you must hand modify boost/cstdint.hpp
 #  endif
 
 #  ifdef BOOST_NO_INT64_T

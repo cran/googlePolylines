@@ -16,9 +16,9 @@
 
 #include <b/geometry/core/access.hpp>
 #include <b/geometry/geometries/concepts/point_concept.hpp>
+#include <b/geometry/util/numeric_cast.hpp>
 #include <b/geometry/util/select_coordinate_type.hpp>
 
-#include <b/numeric/conversion/cast.hpp>
 
 namespace boost { namespace geometry
 {
@@ -33,7 +33,7 @@ class calculate_determinant
     template <typename T>
     static inline ReturnType rt(T const& v)
     {
-        return boost::numeric_cast<ReturnType>(v);
+        return util::numeric_cast<ReturnType>(v);
     }
 
 public :

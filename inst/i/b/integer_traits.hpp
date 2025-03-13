@@ -30,7 +30,7 @@
 //
 // We simply cannot include this header on gcc without getting copious warnings of the kind:
 //
-// ../../../b/integer_traits.hpp:164:66: warning: use of C99 long long integer constant
+// ../../../boost/integer_traits.hpp:164:66: warning: use of C99 long long integer constant
 //
 // And yet there is no other reasonable implementation, so we declare this a system header
 // to suppress these warnings.

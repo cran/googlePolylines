@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 //
 // Copyright (c) 2002-2003 Eric Friedman, Itay Maman
-// Copyright (c) 2012-2023 Antony Polukhin
+// Copyright (c) 2012-2024 Antony Polukhin
 //
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
@@ -40,8 +40,6 @@
 #include <b/blank.hpp>
 #include <b/integer/common_factor_ct.hpp>
 #include <b/static_assert.hpp>
-#include <b/preprocessor/cat.hpp>
-#include <b/preprocessor/repeat.hpp>
 #include <b/type_traits/aligned_storage.hpp>
 #include <b/type_traits/alignment_of.hpp>
 #include <b/type_traits/add_const.hpp>
@@ -93,7 +91,7 @@
 // Implementation Macros:
 //
 // BOOST_VARIANT_VISITATION_UNROLLING_LIMIT
-//   Defined in b/variant/detail/visitation_impl.hpp.
+//   Defined in boost/variant/detail/visitation_impl.hpp.
 //
 // BOOST_VARIANT_MINIMIZE_SIZE
 //   When #defined, implementation employs all known means to minimize the
@@ -1068,7 +1066,7 @@ private:
 ///////////////////////////////////////////////////////////////////////////////
 // class template variant (concept inspired by Andrei Alexandrescu)
 //
-// See docs and b/variant/variant_fwd.hpp for more information.
+// See docs and boost/variant/variant_fwd.hpp for more information.
 //
 template <
       typename T0_
@@ -1095,8 +1093,6 @@ private: // helpers, for typedefs (below)
         : detail::variant::is_over_sequence<unwrapped_T0_>
     {
     };
-
-#if !defined(BOOST_VARIANT_NO_TYPE_SEQUENCE_SUPPORT)
 
 private: // helpers, for typedefs (below)
 
@@ -1140,82 +1136,6 @@ private: // internal typedefs
     typedef typename mpl::front<
           internal_types
         >::type internal_T0;
-
-#else // defined(BOOST_VARIANT_NO_TYPE_SEQUENCE_SUPPORT)
-
-private: // helpers, for typedefs (below)
-
-    typedef unwrapped_T0_ T0;
-
-    #define BOOST_VARIANT_AUX_ENABLE_RECURSIVE_TYPEDEFS(z,N,_) \
-        typedef typename mpl::eval_if< \
-              is_recursive_ \
-            , detail::variant::enable_recursive< \
-                  BOOST_PP_CAT(T,N) \
-                , wknd_self_t \
-                > \
-            , mpl::identity< BOOST_PP_CAT(T,N) > \
-            >::type BOOST_PP_CAT(recursive_enabled_T,N); \
-        /**/
-
-    BOOST_PP_REPEAT(
-          BOOST_VARIANT_LIMIT_TYPES
-        , BOOST_VARIANT_AUX_ENABLE_RECURSIVE_TYPEDEFS
-        , _
-        )
-
-    #undef BOOST_VARIANT_AUX_ENABLE_RECURSIVE_TYPEDEFS
-
-    #define BOOST_VARIANT_AUX_UNWRAP_RECURSIVE_TYPEDEFS(z,N,_) \
-        typedef typename unwrap_recursive< \
-              BOOST_PP_CAT(recursive_enabled_T,N) \
-            >::type BOOST_PP_CAT(public_T,N); \
-        /**/
-
-    BOOST_PP_REPEAT(
-          BOOST_VARIANT_LIMIT_TYPES
-        , BOOST_VARIANT_AUX_UNWRAP_RECURSIVE_TYPEDEFS
-        , _
-        )
-
-    #undef BOOST_VARIANT_AUX_UNWRAP_RECURSIVE_TYPEDEFS
-
-public: // public typedefs
-
-    typedef typename detail::variant::make_variant_list<
-          BOOST_VARIANT_ENUM_PARAMS(public_T)
-        >::type types;
-
-private: // helpers, for internal typedefs (below)
-
-    #define BOOST_VARIANT_AUX_MAKE_REFERENCE_CONTENT_TYPEDEFS(z,N,_) \
-        typedef detail::make_reference_content< \
-              BOOST_PP_CAT(recursive_enabled_T,N) \
-            >::type BOOST_PP_CAT(internal_T,N); \
-        /**/
-
-    BOOST_PP_REPEAT(
-          BOOST_VARIANT_LIMIT_TYPES
-        , BOOST_VARIANT_AUX_MAKE_REFERENCE_CONTENT_TYPEDEFS
-        , _
-        )
-
-    #undef BOOST_VARIANT_AUX_MAKE_REFERENCE_CONTENT_TYPEDEFS
-
-private: // internal typedefs
-
-    typedef typename detail::variant::make_variant_list<
-          BOOST_VARIANT_ENUM_PARAMS(internal_T)
-        >::type internal_types;
-
-private: // static precondition assertions
-
-    // NOTE TO USER :
-    // variant< type-sequence > syntax is not supported on this compiler!
-    //
-    BOOST_MPL_ASSERT_NOT(( is_sequence_based_ ));
-
-#endif // BOOST_VARIANT_NO_TYPE_SEQUENCE_SUPPORT workaround
 
 private: // helpers, for representation (below)
 
@@ -2344,7 +2264,7 @@ public: // visitation support
 ///////////////////////////////////////////////////////////////////////////////
 // metafunction make_variant_over
 //
-// See docs and b/variant/variant_fwd.hpp for more information.
+// See docs and boost/variant/variant_fwd.hpp for more information.
 //
 template <typename Types>
 struct make_variant_over

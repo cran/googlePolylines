@@ -24,7 +24,7 @@
 
 #if !defined(__clang__) || defined(__NVCC__)
 // A bug in version 7.0 of CUDA prevents use of variadic templates in some occasions
-// https://svn.boost.org/trac/b/ticket/11897
+// https://svn.boost.org/trac/boost/ticket/11897
 // This is fixed in 7.5. As the following version macro was introduced in 7.5 an existance
 // check is enough to detect versions < 7.5
 #if BOOST_CUDA_VERSION < 7050000
@@ -51,11 +51,14 @@
 #endif
 //
 // And this one effects the NVCC front end,
-// See https://svn.boost.org/trac/b/ticket/13049
+// See https://svn.boost.org/trac/boost/ticket/13049
 //
 #if (BOOST_CUDA_VERSION >= 8000000) && (BOOST_CUDA_VERSION < 8010000)
 #  define BOOST_NO_CXX11_NOEXCEPT
 #endif
 
+#if !defined(__cpp_nontype_template_parameter_auto) || (__cpp_nontype_template_parameter_auto < 201606)
+#  define BOOST_NO_CXX17_AUTO_NONTYPE_TEMPLATE_PARAMS
 #endif
 
+#endif

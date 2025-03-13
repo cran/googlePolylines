@@ -19,7 +19,7 @@
 
 #include <b/static_assert.hpp>
 
-// Use b/limits to work around missing limits headers on some compilers
+// Use boost/limits to work around missing limits headers on some compilers
 #include <b/limits.hpp>
 #include <b/config.hpp>
 

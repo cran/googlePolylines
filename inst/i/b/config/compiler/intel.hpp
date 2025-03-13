@@ -180,7 +180,7 @@
 #  define BOOST_NO_POINTER_TO_MEMBER_TEMPLATE_PARAMETERS
 #endif
 
-// See http://aspn.activestate.com/ASPN/Mail/Message/b/1614864
+// See http://aspn.activestate.com/ASPN/Mail/Message/boost/1614864
 #if BOOST_INTEL_CXX_VERSION < 600
 #  define BOOST_NO_INTRINSIC_WCHAR_T
 #else

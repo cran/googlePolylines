@@ -13,11 +13,10 @@
 
 #include <cstddef>
 
-#include <b/numeric/conversion/bounds.hpp>
-
 #include <b/geometry/core/access.hpp>
 #include <b/geometry/core/coordinate_dimension.hpp>
 #include <b/geometry/core/coordinate_type.hpp>
+#include <b/geometry/util/bounds.hpp>
 
 
 namespace boost { namespace geometry
@@ -67,9 +66,9 @@ struct initialize
 
     static inline void apply(Box& box,
         coordinate_type min_value
-            = boost::numeric::bounds<coordinate_type>::highest(),
+            = util::bounds<coordinate_type>::highest(),
         coordinate_type max_value
-            = boost::numeric::bounds<coordinate_type>::lowest())
+            = util::bounds<coordinate_type>::lowest())
     {
         initialize_loop
             <

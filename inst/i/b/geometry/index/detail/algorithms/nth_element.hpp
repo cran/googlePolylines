@@ -13,7 +13,7 @@
 
 namespace boost { namespace geometry { namespace index { namespace detail {
 
-// See https://svn.boost.org/trac/b/ticket/12861
+// See https://svn.boost.org/trac/boost/ticket/12861
 //     https://gcc.gnu.org/bugzilla/show_bug.cgi?id=58800
 //     https://gcc.gnu.org/develop.html#timeline
 // 20120920 4.7.2 - no bug

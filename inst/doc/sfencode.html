@@ -12,7 +12,7 @@
 
 <meta name="author" content="D Cooley" />
 
-<meta name="date" content="2024-10-22" />
+<meta name="date" content="2025-03-14" />
 
 <title>Google Polylines</title>
 
@@ -340,7 +340,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Google Polylines</h1>
 <h4 class="author">D Cooley</h4>
-<h4 class="date">2024-10-22</h4>
+<h4 class="date">2025-03-14</h4>
 
 
 
@@ -387,7 +387,6 @@ vectors of coordinates</li>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="fu">encodeCoordinates</span>(lon, lat)</span></code></pre></div>
 <pre><code>## [1] &quot;xgweFcsysZToA?g@f@oAPsD?oApFf@|Hz@`DmAvViJf@jC&quot;</code></pre>
-<p>/private/var/folders/34/4q9d2jv955z0sbp_x2xz2kth0000gn/T/RtmpwP4PTn/Rbuild49a92313dd9a/googlePolylines/vignettes/sfencode.R</p>
 </div>
 <div id="data.frame" class="section level3">
 <h3>data.frame</h3>
@@ -403,7 +402,6 @@ also specify the columns of coordinates:</p>
 <pre><code>## [1] &quot;xgweFcsysZToA?g@f@oAPsD?oApFf@|Hz@`DmAvViJf@jC&quot;</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="do">## or specify the columns to use</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co"># encode(df, lon = &quot;lon&quot;, lat = &quot;lat&quot;)</span></span></code></pre></div>
-<p>/private/var/folders/34/4q9d2jv955z0sbp_x2xz2kth0000gn/T/RtmpwP4PTn/Rbuild49a92313dd9a/googlePolylines/vignettes/sfencode.R</p>
 </div>
 <div id="sf" class="section level3">
 <h3>sf</h3>
@@ -419,19 +417,18 @@ with geometry types</p>
 </ul>
 <p>It will not work on GEOMETRYCOLLECTION objects.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div>
-<pre><code>## Warning: package &#39;sf&#39; was built under R version 4.3.3</code></pre>
 <pre><code>## Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="do">## data set of North Carolina states</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>nc <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(<span class="fu">system.file</span>(<span class="st">&quot;shape/nc.shp&quot;</span>, <span class="at">package=</span><span class="st">&quot;sf&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="do">## data set of North Carolina states</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>nc <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_read</span>(<span class="fu">system.file</span>(<span class="st">&quot;shape/nc.shp&quot;</span>, <span class="at">package=</span><span class="st">&quot;sf&quot;</span>))</span></code></pre></div>
 <pre><code>## Reading layer `nc&#39; from data source 
-##   `/Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/sf/shape/nc.shp&#39; 
+##   `/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/sf/shape/nc.shp&#39; 
 ##   using driver `ESRI Shapefile&#39;
 ## Simple feature collection with 100 features and 14 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
 ## Bounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965
 ## Geodetic CRS:  NAD27</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>nc[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>nc[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span></code></pre></div>
 <pre><code>## Simple feature collection with 5 features and 14 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -449,12 +446,11 @@ with geometry types</p>
 ## 3     208  3616     6     260 MULTIPOLYGON (((-80.45634 3...
 ## 4     123   830     2     145 MULTIPOLYGON (((-76.00897 3...
 ## 5    1066  1606     3    1197 MULTIPOLYGON (((-77.21767 3...</code></pre>
-<p>/private/var/folders/34/4q9d2jv955z0sbp_x2xz2kth0000gn/T/RtmpwP4PTn/Rbuild49a92313dd9a/googlePolylines/vignettes/sfencode.R</p>
 <p>When used on an <code>sf</code> object, an <code>sfencoded</code>
 object is returned, with the encoded polylines replacing the
 <code>sf::st_geometry</code> column.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>enc <span class="ot">&lt;-</span> <span class="fu">encode</span>(nc)</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="fu">str</span>(enc)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>enc <span class="ot">&lt;-</span> <span class="fu">encode</span>(nc)</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="fu">str</span>(enc)</span></code></pre></div>
 <pre><code>## Classes &#39;sfencoded&#39; and &#39;data.frame&#39;:    100 obs. of  15 variables:
 ##  $ AREA     : num  0.114 0.061 0.143 0.07 0.153 0.097 0.062 0.091 0.118 0.124 ...
 ##  $ PERIMETER: num  1.44 1.23 1.63 2.97 2.21 ...
@@ -483,9 +479,9 @@ object is returned, with the encoded polylines replacing the
 ##   ..$ proj: chr &quot;+proj=longlat +datum=NAD27 +no_defs&quot;
 ##   ..$ prec: num 0
 ##   ..$ n_em: int 0</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">attr</span>(enc, <span class="st">&quot;encoded_column&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">attr</span>(enc, <span class="st">&quot;encoded_column&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;geometry&quot;</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>enc[<span class="dv">1</span>, <span class="fu">attr</span>(enc, <span class="st">&quot;encoded_column&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>enc[<span class="dv">1</span>, <span class="fu">attr</span>(enc, <span class="st">&quot;encoded_column&quot;</span>)]</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;u_d|EtsgpNmmFphLyEbcCibLf{Lk~H`bT}rNmjGihHd[kvL_lEzgBkl~@lyE`MnvCimCbmEqfAxnGieH~gEeTd_DmiCxvA_D|oAdwCidAtsKr_AjiEdwA~YztFggAjbCfrAwf@hrF~mBdd@bh@zsB`cCpgCt_@d{B&quot;
 ## attr(,&quot;sfc&quot;)
@@ -493,12 +489,11 @@ object is returned, with the encoded polylines replacing the
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;list&quot;</code></pre>
-<p>/private/var/folders/34/4q9d2jv955z0sbp_x2xz2kth0000gn/T/RtmpwP4PTn/Rbuild49a92313dd9a/googlePolylines/vignettes/sfencode.R</p>
 <p>As you can see, the geometry attributes are kept on the encoded
 object. However, you can remove them by specifying
 <code>strip = TRUE</code></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>encLite <span class="ot">&lt;-</span> <span class="fu">encode</span>(nc, <span class="at">strip =</span> T)</span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="fu">str</span>(encLite)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>encLite <span class="ot">&lt;-</span> <span class="fu">encode</span>(nc, <span class="at">strip =</span> T)</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="fu">str</span>(encLite)</span></code></pre></div>
 <pre><code>## Classes &#39;sfencodedLite&#39; and &#39;data.frame&#39;:    100 obs. of  15 variables:
 ##  $ AREA     : num  0.114 0.061 0.143 0.07 0.153 0.097 0.062 0.091 0.118 0.124 ...
 ##  $ PERIMETER: num  1.44 1.23 1.63 2.97 2.21 ...
@@ -517,20 +512,18 @@ object. However, you can remove them by specifying
 ##  $ geometry :encoded_column of length 100; first element: List of 1
 ##   ..$ : chr &quot;u_d|EtsgpNmmFphLyEbcCibLf{Lk~H`bT}rNmjGihHd[kvL_lEzgBkl~@lyE`MnvCimCbmEqfAxnGieH~gEeTd_DmiCxvA_D|oAdwCidAtsKr_A&quot;| __truncated__
 ##  - attr(*, &quot;encoded_column&quot;)= chr &quot;geometry&quot;</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>encLite[<span class="dv">1</span>, <span class="fu">attr</span>(encLite, <span class="st">&quot;encoded_column&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>encLite[<span class="dv">1</span>, <span class="fu">attr</span>(encLite, <span class="st">&quot;encoded_column&quot;</span>)]</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;u_d|EtsgpNmmFphLyEbcCibLf{Lk~H`bT}rNmjGihHd[kvL_lEzgBkl~@lyE`MnvCimCbmEqfAxnGieH~gEeTd_DmiCxvA_D|oAdwCidAtsKr_AjiEdwA~YztFggAjbCfrAwf@hrF~mBdd@bh@zsB`cCpgCt_@d{B&quot;
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;list&quot;</code></pre>
-<p>/private/var/folders/34/4q9d2jv955z0sbp_x2xz2kth0000gn/T/RtmpwP4PTn/Rbuild49a92313dd9a/googlePolylines/vignettes/sfencode.R</p>
 <p>The benefit of stripping the attributes is to reduce the size of the
 object, which can be useful for web plotting if bandwidth/data transfer
 speeds are an issue.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">vapply</span>(<span class="fu">mget</span>(<span class="fu">c</span>(<span class="st">&#39;nc&#39;</span>, <span class="st">&#39;enc&#39;</span>, <span class="st">&#39;encLite&#39;</span>) ), <span class="cf">function</span>(x) { <span class="fu">format</span>(<span class="fu">object.size</span>(x), <span class="at">units =</span> <span class="st">&quot;Kb&quot;</span>) }, <span class="st">&#39;&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="fu">vapply</span>(<span class="fu">mget</span>(<span class="fu">c</span>(<span class="st">&#39;nc&#39;</span>, <span class="st">&#39;enc&#39;</span>, <span class="st">&#39;encLite&#39;</span>) ), <span class="cf">function</span>(x) { <span class="fu">format</span>(<span class="fu">object.size</span>(x), <span class="at">units =</span> <span class="st">&quot;Kb&quot;</span>) }, <span class="st">&#39;&#39;</span>)</span></code></pre></div>
 <pre><code>##         nc        enc    encLite 
 ## &quot;139.8 Kb&quot;  &quot;90.6 Kb&quot;  &quot;52.6 Kb&quot;</code></pre>
-<p>/private/var/folders/34/4q9d2jv955z0sbp_x2xz2kth0000gn/T/RtmpwP4PTn/Rbuild49a92313dd9a/googlePolylines/vignettes/sfencode.R</p>
 </div>
 </div>
 <div id="well-known-text" class="section level2">
@@ -538,20 +531,18 @@ speeds are an issue.</p>
 <p>The two functions <code>polyline_wkt</code> and
 <code>wkt_polylne</code> can be used to convert <code>sfencoded</code>
 objects to and from well-known text.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>wkt <span class="ot">&lt;-</span> <span class="fu">polyline_wkt</span>(enc)</span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>wkt[<span class="dv">1</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>wkt <span class="ot">&lt;-</span> <span class="fu">polyline_wkt</span>(enc)</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>wkt[<span class="dv">1</span>, ]</span></code></pre></div>
 <pre><code>##    AREA PERIMETER CNTY_ CNTY_ID NAME  FIPS FIPSNO CRESS_ID BIR74 SID74 NWBIR74
 ## 1 0.114     1.442  1825    1825 Ashe 37009  37009        5  1091     1      10
 ##   BIR79 SID79 NWBIR79                          geometry
 ## 1  1364     0      19 MULTIPOLYGON (((-81.472748 36....</code></pre>
-<p>/private/var/folders/34/4q9d2jv955z0sbp_x2xz2kth0000gn/T/RtmpwP4PTn/Rbuild49a92313dd9a/googlePolylines/vignettes/sfencode.R</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>enc2 <span class="ot">&lt;-</span> <span class="fu">wkt_polyline</span>(wkt)</span>
-<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>enc2[<span class="dv">1</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>enc2 <span class="ot">&lt;-</span> <span class="fu">wkt_polyline</span>(wkt)</span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>enc2[<span class="dv">1</span>, ]</span></code></pre></div>
 <pre><code>##    AREA PERIMETER CNTY_ CNTY_ID NAME  FIPS FIPSNO CRESS_ID BIR74 SID74 NWBIR74
 ## 1 0.114     1.442  1825    1825 Ashe 37009  37009        5  1091     1      10
 ##   BIR79 SID79 NWBIR79                              geometry
 ## 1  1364     0      19 MULTIPOLYGON: erenEdma_NcvDgbCmhEw...</code></pre>
-<p>/private/var/folders/34/4q9d2jv955z0sbp_x2xz2kth0000gn/T/RtmpwP4PTn/Rbuild49a92313dd9a/googlePolylines/vignettes/sfencode.R</p>
 <p>I’ve provided these functions to enable the conversion of encoded
 polylines into other geometry formats, should they be required by other
 packages.</p>
@@ -559,8 +550,8 @@ packages.</p>
 <h3>Converting to sf</h3>
 <p><code>sf</code> can read well-known text, so you can convert the wkt
 object back to <code>sf</code> / <code>sfc</code> objects</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="co"># sfc from wkt</span></span>
-<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a><span class="fu">st_as_sfc</span>(wkt<span class="sc">$</span>geometry)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="co"># sfc from wkt</span></span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a><span class="fu">st_as_sfc</span>(wkt<span class="sc">$</span>geometry)</span></code></pre></div>
 <pre><code>## Geometry set for 100 features 
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -572,12 +563,12 @@ object back to <code>sf</code> / <code>sfc</code> objects</p>
 <pre><code>## MULTIPOLYGON (((-80.45634 36.24255, -80.47638 3...</code></pre>
 <pre><code>## MULTIPOLYGON (((-76.00897 36.31959, -76.01734 3...</code></pre>
 <pre><code>## MULTIPOLYGON (((-77.21766 36.24098, -77.23461 3...</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="do">## back to sf - use `as.data.frame` to remove sfencoded attributes</span></span>
-<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a>sf_wkt <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(wkt)</span>
-<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a>sf_wkt<span class="sc">$</span>geometry <span class="ot">&lt;-</span> <span class="fu">st_as_sfc</span>(sf_wkt<span class="sc">$</span>geometry)</span>
-<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a>sf_wkt <span class="ot">&lt;-</span> <span class="fu">st_sf</span>(sf_wkt)</span>
-<span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a>  </span>
-<span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a><span class="fu">head</span>(sf_wkt[, <span class="fu">c</span>(<span class="st">&quot;AREA&quot;</span>, <span class="st">&quot;PERIMETER&quot;</span>, <span class="st">&quot;geometry&quot;</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="do">## back to sf - use `as.data.frame` to remove sfencoded attributes</span></span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a>sf_wkt <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(wkt)</span>
+<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a>sf_wkt<span class="sc">$</span>geometry <span class="ot">&lt;-</span> <span class="fu">st_as_sfc</span>(sf_wkt<span class="sc">$</span>geometry)</span>
+<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a>sf_wkt <span class="ot">&lt;-</span> <span class="fu">st_sf</span>(sf_wkt)</span>
+<span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a>  </span>
+<span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a><span class="fu">head</span>(sf_wkt[, <span class="fu">c</span>(<span class="st">&quot;AREA&quot;</span>, <span class="st">&quot;PERIMETER&quot;</span>, <span class="st">&quot;geometry&quot;</span>)])</span></code></pre></div>
 <pre><code>## Simple feature collection with 6 features and 2 fields
 ## Geometry type: MULTIPOLYGON
 ## Dimension:     XY
@@ -590,19 +581,18 @@ object back to <code>sf</code> / <code>sfc</code> objects</p>
 ## 4 0.070     2.968 MULTIPOLYGON (((-76.00897 3...
 ## 5 0.153     2.206 MULTIPOLYGON (((-77.21766 3...
 ## 6 0.097     1.670 MULTIPOLYGON (((-76.74506 3...</code></pre>
-<p>/private/var/folders/34/4q9d2jv955z0sbp_x2xz2kth0000gn/T/RtmpwP4PTn/Rbuild49a92313dd9a/googlePolylines/vignettes/sfencode.R</p>
 </div>
 </div>
 <div id="decoding" class="section level2">
 <h2>Decoding</h2>
 <p>Use <code>decode()</code> to decode polylines into coordinates. This
 function will return a list of data.frames with lon/lat column.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a>polylines <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a> <span class="st">&quot;ohlbDnbmhN~suq@am{tAw`qsAeyhGvkz`@fge}A&quot;</span>,</span>
-<span id="cb38-3"><a href="#cb38-3" tabindex="-1"></a> <span class="st">&quot;ggmnDt}wmLgc`DesuQvvrLofdDorqGtzzV&quot;</span></span>
-<span id="cb38-4"><a href="#cb38-4" tabindex="-1"></a>)</span>
-<span id="cb38-5"><a href="#cb38-5" tabindex="-1"></a></span>
-<span id="cb38-6"><a href="#cb38-6" tabindex="-1"></a><span class="fu">decode</span>(polylines)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>polylines <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a> <span class="st">&quot;ohlbDnbmhN~suq@am{tAw`qsAeyhGvkz`@fge}A&quot;</span>,</span>
+<span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a> <span class="st">&quot;ggmnDt}wmLgc`DesuQvvrLofdDorqGtzzV&quot;</span></span>
+<span id="cb37-4"><a href="#cb37-4" tabindex="-1"></a>)</span>
+<span id="cb37-5"><a href="#cb37-5" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="#cb37-6" tabindex="-1"></a><span class="fu">decode</span>(polylines)</span></code></pre></div>
 <pre><code>## [[1]]
 ##      lat       lon
 ## 1 26.774 -80.18999
@@ -616,15 +606,13 @@ function will return a list of data.frames with lon/lat column.</p>
 ## 2 29.570 -67.51400
 ## 3 27.339 -66.66800
 ## 4 28.745 -70.57899</code></pre>
-<p>/private/var/folders/34/4q9d2jv955z0sbp_x2xz2kth0000gn/T/RtmpwP4PTn/Rbuild49a92313dd9a/googlePolylines/vignettes/sfencode.R</p>
 </div>
 <div id="benchmarking" class="section level2">
 <h2>Benchmarking</h2>
 <p>You will note that the encoded strings are different between the two
 <code>enc</code> objects created earlier. For example</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a>enc[<span class="dv">1</span>, <span class="st">&#39;geometry&#39;</span>][[<span class="dv">1</span>]] <span class="sc">==</span> enc2[<span class="dv">1</span>, <span class="st">&#39;geometry&#39;</span>][[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a>enc[<span class="dv">1</span>, <span class="st">&#39;geometry&#39;</span>][[<span class="dv">1</span>]] <span class="sc">==</span> enc2[<span class="dv">1</span>, <span class="st">&#39;geometry&#39;</span>][[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## [1] FALSE FALSE</code></pre>
-<p>/private/var/folders/34/4q9d2jv955z0sbp_x2xz2kth0000gn/T/RtmpwP4PTn/Rbuild49a92313dd9a/googlePolylines/vignettes/sfencode.R</p>
 <p>This results from the <strong>lossy</strong>-ness of the encoding.
 However, the general shape of the information is preserved. These two
 maps are plots of the <code>enc</code> and <code>enc2</code> objects

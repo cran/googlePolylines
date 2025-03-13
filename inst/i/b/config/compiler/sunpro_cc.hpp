@@ -59,8 +59,8 @@
 
 #    if (__SUNPRO_CC < 0x570)
 #      define BOOST_NO_TEMPLATE_TEMPLATES
-       // see http://lists.boost.org/MailArchives/b/msg47184.php
-       // and http://lists.boost.org/MailArchives/b/msg47220.php
+       // see http://lists.boost.org/MailArchives/boost/msg47184.php
+       // and http://lists.boost.org/MailArchives/boost/msg47220.php
 #      define BOOST_NO_INCLASS_MEMBER_INITIALIZATION
 #      define BOOST_NO_SFINAE
 #      define BOOST_NO_ARRAY_TYPE_SPECIALIZATIONS
@@ -193,6 +193,9 @@
 #endif
 #if !defined(__cpp_if_constexpr) || (__cpp_if_constexpr < 201606)
 #  define BOOST_NO_CXX17_IF_CONSTEXPR
+#endif
+#if !defined(__cpp_nontype_template_parameter_auto) || (__cpp_nontype_template_parameter_auto < 201606)
+#  define BOOST_NO_CXX17_AUTO_NONTYPE_TEMPLATE_PARAMS
 #endif
 
 // Turn on threading support for Solaris 12.

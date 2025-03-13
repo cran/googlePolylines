@@ -1,5 +1,5 @@
 //
-// Copyright 2012-2023 Antony Polukhin.
+// Copyright 2012-2024 Antony Polukhin.
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -8,7 +8,7 @@
 #ifndef BOOST_TYPE_INDEX_HPP
 #define BOOST_TYPE_INDEX_HPP
 
-/// \file b/type_index.hpp
+/// \file boost/type_index.hpp
 /// \brief Includes minimal set of headers required to use the Boost.TypeIndex library.
 ///
 /// By inclusion of this file most optimal type index classes will be included and used 

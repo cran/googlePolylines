@@ -10,9 +10,9 @@
 //  Revision History
 //  02 Jun 14  Remove VC6 workarounds.
 //  16 Jul 11  Bugfixes for VC6.
-//  23 JUN 05  Code extracted from /b/cast.hpp into this new header.
+//  23 JUN 05  Code extracted from /boost/cast.hpp into this new header.
 //             Keeps this legacy version of numeric_cast<> for old compilers
-//             wich can't compile the new version in /b/numeric/conversion/cast.hpp
+//             wich can't compile the new version in /boost/numeric/conversion/cast.hpp
 //             (Fernando Cacciola)
 //  02 Apr 01  Removed BOOST_NO_LIMITS workarounds and included
 //             <b/limits.hpp> instead (the workaround did not
@@ -23,7 +23,7 @@
 //             vc-stlport.
 //  20 Jan 01  Moved BOOST_NO_LIMITS_COMPILE_TIME_CONSTANTS to config.hpp.
 //             Removed unused BOOST_EXPLICIT_TARGET macro. Moved
-//             boost::detail::type to b/type.hpp. Made it compile with
+//             boost::detail::type to boost/type.hpp. Made it compile with
 //             stock gcc again (Dave Abrahams)
 //  29 Nov 00  Remove nested namespace cast, cleanup spacing before Formal
 //             Review (Beman Dawes)

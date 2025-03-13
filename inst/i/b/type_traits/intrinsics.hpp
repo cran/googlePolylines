@@ -165,7 +165,7 @@
 // Note that these intrinsics are disabled for the CUDA meta-compiler as it appears
 // to not support them, even though the underlying clang compiler does so.
 // This is a rubbish fix as it basically stops type traits from working correctly, 
-// but maybe the best we can do for now.  See https://svn.boost.org/trac/b/ticket/10694
+// but maybe the best we can do for now.  See https://svn.boost.org/trac/boost/ticket/10694
 //
 //
 // Note that even though these intrinsics rely on other type traits classes
